@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by qmacro (http://jsbin.com/eXeBOcE/3/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+  
+    <title>3417229</title>
+
+    <script src="https://sapui5.hana.ondemand.com/sdk/resources/sap-ui-core.js"
+        type="text/javascript"
+        id="sap-ui-bootstrap"
+        data-sap-ui-libs="sap.ui.commons,sap.ui.table"
+        data-sap-ui-theme="sap_goldreflection">
+    </script>
+    
+    <script>
+      
+      sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel({
+        numbers: [{value: 1000}, {value: 20000}, {value: 300000}, {value: 4000000}]
+      }));
+
+      var oExoticDecimalTypeForUS = new sap.ui.model.type.Float({
+        groupingEnabled: true,
+        groupingSeparator: "-",
+        minFractionDigits: 2
+      });
+
+      new sap.ui.table.Table({
+        columns: [  
+          new sap.ui.table.Column({  
+            label: new sap.ui.commons.Label({text: "Numbers"}),  
+            template: new sap.ui.commons.TextView().bindProperty("text", {
+              path: "value",
+              type: oExoticDecimalTypeForUS
+            })
+          })
+        ]
+      }).bindRows("/numbers").placeAt("content");
+                                
+    </script>
+
+  </head>
+  <body class="sapUiBody">
+    <div id="content"></div>
+  </body>
+</html>
