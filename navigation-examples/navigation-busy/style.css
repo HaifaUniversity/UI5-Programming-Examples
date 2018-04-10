@@ -1,0 +1,13 @@
+/* Styles go here */
+
+.labelStyle{
+      font-size: 0.975rem;
+      font-weight: bold;
+      margin-top: 18%;
+}
+.hBoxStyle{
+  margin-left:35%;
+}
+.inputStyle{
+  margin-left:10%;
+}
