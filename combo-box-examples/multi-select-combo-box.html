@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by CmIm (http://jsbin.com/qahoy/3/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title>MultiComboBox with JSON</title>
+  
+    <!-- 1.) Load SAPUI5 (from a remote server), select theme and control library -->
+    <script id="sap-ui-bootstrap"
+        src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_bluecrystal"
+        data-sap-ui-libs="sap.ui.commons,sap.m"></script>
+
+
+    <!-- 2.) Create a UI5 button and place it onto the page -->
+    <script>
+    
+      
+  var mData = [  
+               {key:"0",text:"Tomorro"},  
+               {key:"1",text:"Next Week"},  
+               {key:"2",text:"Next Month"},  
+               {key:"3",text:"Pick a range..."}  
+           ];  
+
+  var oModel = new sap.ui.model.json.JSONModel(mData);  
+  sap.ui.getCore().setModel(oModel);  
+  
+  
+      
+     var oMCB = new sap.m.MultiComboBox({  
+      items : {  
+        path : "/",  
+        template : new sap.ui.core.ListItem({  
+          key  : "{key}",  
+          text : "{text}"  
+        })  
+      }  
+    })  
+    .setSelectedKeys(["1"]); // will select "Next Week" item  
+      
+      
+      
+   var oApp = new sap.m.App("myApp", {
+             initialPage : "page1"
+       });    
+      
+
+
+    var oPage = new sap.m.Page("page1", {
+             content :[oMCB] 
+       });
+         
+        oApp.addPage(oPage);
+       oApp.placeAt("content");
+      
+    </script>
+ 
+
+</head>
+<body class="sapUiBody">
+
+    <!-- This is where you place the UI5 button -->
+    <div id="content"></div>
+ 
+</body>
+</html>
