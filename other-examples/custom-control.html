@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/openui5-custom-control/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html><head>
+  <meta name="description" content="UI5: Create your own control" />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+	
+	<title>UI5 custom control in 19 seconds example</title>
+	
+	<script id='sap-ui-bootstrap' type='text/javascript'
+		src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'
+		data-sap-ui-theme='sap_bluecrystal'></script> 
+		<!-- no control library is imported - we build the Control on our own! -->
+	
+	<script>
+		
+		// PART 1: define a new (simple) Control type
+		
+		sap.ui.core.Control.extend("my.Square", { // call the new Control type "my.Square" and let it inherit from sap.ui.core.Control
+			
+			// the control API:
+			metadata : {
+				properties : {           // setter and getter are created behind the scenes, incl. data binding and type validation
+					"text" : "string",   // in simple cases, just define the type
+					"size" : {type: "sap.ui.core.CSSSize", defaultValue: "200px"} // you can also give a default value and more
+				}
+			},
+			
+			// the part creating the HTML:
+			renderer : function(oRm, oControl) { // static function, so use the given "oControl" instance instead of "this" in the renderer function
+				oRm.write("<div"); 
+				oRm.writeControlData(oControl);  // writes the Control ID and enables event handling - important!
+				oRm.addStyle("width", oControl.getSize());  // write the Control property size; the Control has validated it to be a CSS size
+				oRm.addStyle("height", oControl.getSize());
+				oRm.writeStyles();
+				oRm.addClass("mySquare");        // add a CSS class for styles common to all control instances
+				oRm.writeClasses();              // this call writes the above class plus enables support for Square.addStyleClass(...)
+				oRm.write(">");
+				oRm.writeEscaped(oControl.getText()); // write another Control property, with XSS protection
+				oRm.write("</div>");
+			},
+			
+			// an event handler:
+			onclick : function(evt) {   // is called when the Control's area is clicked - no event registration required
+				alert("Control clicked! Text of the Control is:\n" + this.getText());
+			}
+		});
+		
+		
+		
+		// PART 2: instantiate Control and place it onto the page
+		
+		var myControl = new my.Square({text:"Hello", size: "100px"});
+		myControl.placeAt("content");
+		
+		// ok, add another instance...:
+		new my.Square({text:"Me too!", size: "80px"}).placeAt("content");
+		
+	</script>
+	
+	
+	<style>
+		/* PART 3: the style common to all control instances */
+		/* Could also be added inline to the control HTML, or separated out into a CSS file */
+		
+		.mySquare {                  /* style the CSS class that has been written by the renderer method */
+			display: inline-block;   /* enable squares to appear next to each other within one line */
+			border: 1px solid red;   /* add some border, so the square can actually be seen */
+			background-color: #ddd;
+			padding: 8px;
+			text-align: center;
+			-moz-box-sizing: border-box; /* consider padding+border part of the width/height */
+			box-sizing: border-box;
+		}
+	</style>
+	
+	</head>
+	<body class='sapUiBody'>
+		<div id='content'></div>
+	<script id="jsbin-javascript">
+
+
+</script>
+</body>
+</html>

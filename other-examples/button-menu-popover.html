@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by dennisseah (http://jsbin.com/rodudup/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m,sap.ui.commons"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<body class="sapUiBody">
+  <div id='content'></div>
+<script id="jsbin-javascript">
+var popover = new sap.m.Popover({
+  title: "First Popover",
+  content: new sap.m.List({
+    mode: sap.m.ListMode.SingleSelectMaster,
+    items: {
+      path: '/',
+      template: new sap.m.StandardListItem({
+        title: '{text}'
+      })
+    }
+  })
+});
+
+function stateManager(cur) {
+  btn.setPressed(false);
+  btn2.setPressed(false);
+  cur.setPressed(true);
+}
+
+var btn = new sap.m.ToggleButton({
+  text: 'Hello',
+  press: function( ) {
+    stateManager(this);
+    popover.openBy(this);
+  }
+});
+
+btn.placeAt('content');
+
+var btn2 = new sap.m.ToggleButton({
+  text: 'Hello',
+  press: function( ) {
+    stateManager(this);
+    popover.openBy(this);
+  }
+});
+
+btn2.placeAt('content');
+
+var model = new sap.ui.model.json.JSONModel([
+  {  
+    key: 'fruits', 
+    text: 'Fruits',
+    items: [
+      {key: 'apple', text: 'Apple'},
+      {key: 'orange', text: 'Orange'}
+    ]
+  },
+    {  
+    key: 'veg', 
+    text: 'Vegetable',
+    items: [
+      {key: 'cabbage', text: 'Cabbage'},
+      {key: 'longbeans', text: 'Long Bean'}
+    ]
+  }
+]);
+popover.setModel(model);
+</script>
+</body>
+</html>
