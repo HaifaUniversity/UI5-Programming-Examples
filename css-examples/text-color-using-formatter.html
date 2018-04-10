@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/qutaxixona/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+  
+<html><head>  
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />  
+    <title>Hello World</title>  
+  
+    <script id='sap-ui-bootstrap' 
+        src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'  
+        data-sap-ui-theme='sap_bluecrystal'  
+        data-sap-ui-libs='sap.ui.commons,sap.ui.table'></script>   
+  
+  
+  <!-- approach 1 step A : Css Selector -->
+  <style>
+  span[data-colorcode = "green"]{background-color : rgba(0, 128, 0, 0.22) }
+  span[data-colorcode = "red"]{  background-color :  rgba(255, 0, 0, 0.13) } , 
+</style> 
+   <!-- approach 2 step A : Css style class --> 
+<style>   
+
+  .yellow{ background-color : rgba(255, 255, 0, 0.35) }
+  .cyan {  background-color : rgba(0, 255, 255, 0.28) }  
+ 
+  
+</style>  
+<script>  
+  
+     var data = [
+       {sex: 'm', fname: 'XXX' , lname : 'YYYYY'},
+       {sex: 'm', fname: 'a' , lname : 'YYYYY'},
+       {sex: 'f', fname: 'XbXX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXdX', lname : 'YYYYY'} ,
+       {sex: 'm', fname: 'XXbxX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXXn', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXgX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXbX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXXc', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXX', lname : 'YYYYY'},
+       {sex: 'f', fname: 'XXX', lname : 'YYYYY'},
+    ];
+  
+   
+   var oTable = new sap.ui.table.Table();
+  
+   oTable.addColumn(new sap.ui.table.Column({ label: "Sex",
+                                             template:  sap.ui.commons.TextField({value : "{sex}"  })
+        }));
+  
+   
+    // Approach 1  
+   var template = new sap.ui.commons.TextView().bindProperty("text", {
+            parts: [
+                {path: "sex" },
+                {path: "fname" }
+            ],
+     <!--  approach 1 step B : Formatter  -->
+            formatter: function(sex, fname){    
+              console.log(sex);
+              if(sex == "m" ){
+                <!-- approach 1 step C : Write to DOM -->
+                this.addCustomData(new sap.ui.core.CustomData(
+                  {key: "colorcode", value: "red", writeToDom:true }
+                ));
+              
+              }  else if(sex == "f" )
+              {
+                    this.addCustomData(new sap.ui.core.CustomData(
+                  {key: "colorcode", value: "green", writeToDom:true }
+                ));
+              
+              }
+                           
+              
+              return fname ;
+            }
+            
+        }) ;
+  
+    oTable.addColumn(new sap.ui.table.Column({ label: "First Name",
+            template: template,
+        }));
+  
+  
+  // Approach 2
+    template = new sap.ui.commons.TextView().bindProperty("text", {
+            parts: [
+                {path: "sex" },
+                {path: "lname" }
+            ],
+            formatter: function(sex, lname){                  
+              if(sex == "m" ){
+                <!-- approach 2 step B : Add Css style class to element -->
+                this.addStyleClass("yellow");
+              
+              }  else  if(sex == "f" )
+              {
+                   this.addStyleClass("cyan");
+              
+              }
+              return lname ;
+            
+            }
+            
+        }) ;
+  
+    oTable.addColumn(new sap.ui.table.Column({ label: "Last Name",
+            template: template,
+        }));
+  
+  
+  
+  
+  
+  
+  
+   var oModel = new sap.ui.model.json.JSONModel();
+   oModel.setData({modelData: data});
+   oTable.setModel(oModel);
+   oTable.bindRows("/modelData");
+   oTable.placeAt('content');  
+</script>
+
+</head>
+<body class='sapUiBody'>
+    <div id='content'></div>
+<script id="jsbin-javascript">
+
+
+</script>
+</body>
+</html>
+  
