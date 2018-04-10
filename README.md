@@ -24,9 +24,9 @@
 *   F4 inside table row(F4 value help in Inside sap.m.table)
     *   [https://jsfiddle.net/indrajithpatel/va0y7j7r/18/](https://jsfiddle.net/indrajithpatel/va0y7j7r/18/)
 *   Table rows move up and down(Interchanging the table rows)
-    *   [JS Bin – Collaborative JavaScript Debugging&lt;/title&gt;  &lt;link rel=&quot;alternate&quot; type=&quot;application/jso…](http://jsbin.com/UPokiS/2/edit?html,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/UPokiS/2/edit?html,output)
 *   Set firstColumnCount based on List(Pagination based on given input in sap.ui.table rows)
-    *   [JS Bin – Collaborative JavaScript Debugging&lt;/title&gt;  &lt;link rel=&quot;alternate&quot; type=&quot;application/jso…](http://jsbin.com/jaleyu/1/edit?html,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/jaleyu/1/edit?html,output)
 *   Import csv as table values
     *   [http://help.sap.com/businessobject/product\_guides/vi01/en/webide\_visExp_en.pdf](http://help.sap.com/businessobject/product_guides/vi01/en/webide_visExp_en.pdf)
 *   Add Values into Table(Given input is adding to table row)
@@ -34,7 +34,7 @@
 *   Table view more, view less with out using growth property(using button number of rows displayed)
     *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/kipese/21/edit?js,output)
 *   Sap.ui.Table Binding
-    *   [JS Bin – Collaborative JavaScript Debugging&lt;/title&gt; &lt;link rel=&quot;alternate&quot; type=&quot;application/jso…](http://jsbin.com/openui5-table-json/6/edit?html,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/openui5-table-json/6/edit?html,output)
 *   Table Rebinding after adding some value to the table,
     *   [http://jsbin.com/sojot/1/edit?html,output](http://jsbin.com/sojot/1/edit?html,output)
 *   Table Merge Cells,
@@ -166,9 +166,9 @@ Export to Pdf from UI5 side,
 *   Move Item from one Json Model to another Json Model,
     *   [http://jsbin.com/dupoxi/edit?css,js,output](http://jsbin.com/dupoxi/edit?css,js,output)
 *   List Data Binding
-    *   [JS Bin – Collaborative JavaScript Debugging&lt;/title&gt; &lt;link rel=&quot;alternate&quot; type=&quot;application/jso…](http://jsbin.com/openui5-mobile-list-databinding/2/edit?html,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/openui5-mobile-list-databinding/2/edit?html,output)
 *   Custom Control
-    *   [JS Bin – Collaborative JavaScript Debugging&lt;/title&gt; &lt;link rel=&quot;alternate&quot; type=&quot;application/jso…](http://jsbin.com/openui5-custom-control/2/edit?html,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/openui5-custom-control/2/edit?html,output)
 *   Signature Pad,
     *   [http://jsbin.com/suquki/18/edit?html,js,output](http://jsbin.com/suquki/18/edit?html,js,output)
 *   Toggle button in pop up,
