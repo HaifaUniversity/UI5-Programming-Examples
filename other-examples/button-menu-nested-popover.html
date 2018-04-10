@@ -1,73 +1,77 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
-<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m"></script>
-  <meta charset="utf-8">
-  <title>JS Bin</title>
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m"></script>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
 </head>
+
 <body class="sapUiBody">
-  <div id='content'></div>
-<script id="jsbin-javascript">
-var secondPopover = new sap.m.Popover({
-  title: "Second Popover",
-  content: new sap.m.List({
-  })
-});
+    <div id='content'></div>
+    <script id="jsbin-javascript">
+        var secondPopover = new sap.m.Popover({
+            title: "Second Popover",
+            content: new sap.m.List({})
+        });
 
-var firstPopover = new sap.m.Popover({
-  title: "First Popover",
-  content: new sap.m.List({
-    mode: sap.m.ListMode.SingleSelectMaster,
-    items: {
-      path: '/',
-      template: new sap.m.StandardListItem({
-        title: '{text}'
-      })
-    },
-    selectionChange: function(e) {
-      var itm = e.getParameter('listItem');
-      var cxt = itm.getBindingContext();
-      var path = cxt.getPath();
-      secondPopover.getContent()[0].bindItems({
-        path: path + '/items',
-        template: new sap.m.StandardListItem({
-          title: '{text}'
-        })
-      });
-      secondPopover.openBy(itm);
-    }
-  })
-});
+        var firstPopover = new sap.m.Popover({
+            title: "First Popover",
+            content: new sap.m.List({
+                mode: sap.m.ListMode.SingleSelectMaster,
+                items: {
+                    path: '/',
+                    template: new sap.m.StandardListItem({
+                        title: '{text}'
+                    })
+                },
+                selectionChange: function(e) {
+                    var itm = e.getParameter('listItem');
+                    var cxt = itm.getBindingContext();
+                    var path = cxt.getPath();
+                    secondPopover.getContent()[0].bindItems({
+                        path: path + '/items',
+                        template: new sap.m.StandardListItem({
+                            title: '{text}'
+                        })
+                    });
+                    secondPopover.openBy(itm);
+                }
+            })
+        });
 
-var oButton = new sap.m.Button({
-  text: "Open",
-  press: function () {
-    firstPopover.openBy(oButton);
-  }
-}).placeAt("content");
+        var oButton = new sap.m.Button({
+            text: "Open",
+            press: function() {
+                firstPopover.openBy(oButton);
+            }
+        }).placeAt("content");
 
-var model = new sap.ui.model.json.JSONModel([
-  {  
-    key: 'fruits', 
-    text: 'Fruits',
-    items: [
-      {key: 'apple', text: 'Apple'},
-      {key: 'orange', text: 'Orange'}
-    ]
-  },
-    {  
-    key: 'veg', 
-    text: 'Vegetable',
-    items: [
-      {key: 'cabbage', text: 'Cabbage'},
-      {key: 'longbeans', text: 'Long Bean'}
-    ]
-  }
-]);
+        var model = new sap.ui.model.json.JSONModel([{
+            key: 'fruits',
+            text: 'Fruits',
+            items: [{
+                key: 'apple',
+                text: 'Apple'
+            }, {
+                key: 'orange',
+                text: 'Orange'
+            }]
+        }, {
+            key: 'veg',
+            text: 'Vegetable',
+            items: [{
+                key: 'cabbage',
+                text: 'Cabbage'
+            }, {
+                key: 'longbeans',
+                text: 'Long Bean'
+            }]
+        }]);
 
-sap.ui.getCore().setModel(model);
-
-</script>
+        sap.ui.getCore().setModel(model);
+    </script>
 </body>
+
 </html>

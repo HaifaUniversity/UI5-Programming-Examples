@@ -1,88 +1,88 @@
 <!DOCTYPE HTML>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<title>Table  - Add data in JSON</title>
-<link rel="shortcut icon" type="image/x-icon" href="images/controls/sap.ui.table.Table.gif">
-<script id="sap-ui-bootstrap" 
-	type="text/javascript"
-	data-sap-ui-libs="sap.m"
-	data-sap-ui-theme="sap_goldreflection"
-	src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"></script>
+    <title>Table - Add data in JSON</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/controls/sap.ui.table.Table.gif">
+    <script id="sap-ui-bootstrap" type="text/javascript" data-sap-ui-libs="sap.m" data-sap-ui-theme="sap_goldreflection" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"></script>
 
-  <script type="text/javascript">
-    
-    function bindModel(tbl) {
-      tbl.bindItems("/", new sap.m.ColumnListItem({
-        cells : [ new sap.m.Text({
-          text : "{lastName}"
-        }), new sap.m.Text({
-          text : "{firstName}"
-        })]
-      }));
-    }
-    
-    function addNewUser(tbl, obj) {
-      tbl.getModel().getData().push(obj);
-      bindModel(tbl);
-      setTimeout(function() {
-         scrollToItem(tbl);
-      }, 500);
-    }
-    
-    function scrollToItem(tbl) {
-      var idx = tbl.getModel().getData().length -1;
-      var domTr = tbl.$().find(( "table tr:nth-child(" + idx + ")"));
-      domTr.focus();
-    }
+    <script type="text/javascript">
+        function bindModel(tbl) {
+            tbl.bindItems("/", new sap.m.ColumnListItem({
+                cells: [new sap.m.Text({
+                    text: "{lastName}"
+                }), new sap.m.Text({
+                    text: "{firstName}"
+                })]
+            }));
+        }
 
-	var oTable = new sap.m.Table({
-      mode: sap.m.ListMode.Delete,
-      columns: [
-        new sap.m.Column({
-            width : "1em",
-            header : new sap.m.Label({
-                text : "Last Name"
-            })
-        }),
-        new sap.m.Column({
-            width : "1em",
-            header : new sap.m.Label({
-                text : "First Name"
-            })
-        })
-      ],
-      delete: function(e) {
-         var path = e.getParameter('listItem').getBindingContext().sPath;
-         var obj = oTable.getModel().getProperty(path);
-         console.log(obj); // here is the object ot be deleted
-         oTable.getModel().getData().splice(parseInt(path.substring(1)), 1);
-         oTable.removeItem(e.getParameter('listItem'));
-         // Simulate Adding New User after 1 second
-         setTimeout(function() {
-            addNewUser(oTable, obj); //adding the deleted user back.
-         }, 1000);
-      }
-    });
+        function addNewUser(tbl, obj) {
+            tbl.getModel().getData().push(obj);
+            bindModel(tbl);
+            setTimeout(function() {
+                scrollToItem(tbl);
+            }, 500);
+        }
 
-    var oModel = new sap.ui.model.json.JSONModel();
-    var users = [];
-    for (var i = 0; i < 100; i++) {
-      users.push({lastName: 'lastName' + i,  firstName: 'firstName' + i});
-    }
-    oModel.setData(users);
-    
-	oTable.setModel(oModel);
-	oTable.placeAt("content");
-    bindModel(oTable);
+        function scrollToItem(tbl) {
+            var idx = tbl.getModel().getData().length - 1;
+            var domTr = tbl.$().find(("table tr:nth-child(" + idx + ")"));
+            domTr.focus();
+        }
 
-</script>
+        var oTable = new sap.m.Table({
+            mode: sap.m.ListMode.Delete,
+            columns: [
+                new sap.m.Column({
+                    width: "1em",
+                    header: new sap.m.Label({
+                        text: "Last Name"
+                    })
+                }),
+                new sap.m.Column({
+                    width: "1em",
+                    header: new sap.m.Label({
+                        text: "First Name"
+                    })
+                })
+            ],
+            delete: function(e) {
+                var path = e.getParameter('listItem').getBindingContext().sPath;
+                var obj = oTable.getModel().getProperty(path);
+                console.log(obj); // here is the object ot be deleted
+                oTable.getModel().getData().splice(parseInt(path.substring(1)), 1);
+                oTable.removeItem(e.getParameter('listItem'));
+                // Simulate Adding New User after 1 second
+                setTimeout(function() {
+                    addNewUser(oTable, obj); //adding the deleted user back.
+                }, 1000);
+            }
+        });
+
+        var oModel = new sap.ui.model.json.JSONModel();
+        var users = [];
+        for (var i = 0; i < 100; i++) {
+            users.push({
+                lastName: 'lastName' + i,
+                firstName: 'firstName' + i
+            });
+        }
+        oModel.setData(users);
+
+        oTable.setModel(oModel);
+        oTable.placeAt("content");
+        bindModel(oTable);
+    </script>
 </head>
+
 <body class="sapUiBody" role="application">
-  <h2>Delete in sap.m.table</h2>
-  <div id="content"></div>
+    <h2>Delete in sap.m.table</h2>
+    <div id="content"></div>
 </body>
+
 </html>

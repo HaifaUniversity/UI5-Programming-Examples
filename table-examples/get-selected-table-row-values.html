@@ -1,61 +1,77 @@
 <meta name="robots" content="noindex">
 <html>
-  <head>
+
+<head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
- 
-    <script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
-        id="sap-ui-bootstrap"
-        data-sap-ui-libs="sap.m"
-        data-sap-ui-theme="sap_bluecrystal"
-        type="text/javascript">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
+    <script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-libs="sap.m" data-sap-ui-theme="sap_bluecrystal" type="text/javascript">
     </script>
- 
-  </head>
-  <body class="sapUiBody">
+
+</head>
+
+<body class="sapUiBody">
     <div id="content"></div>
-  <script id="jsbin-javascript">
-jQuery(function() {
-  var oModel = new sap.ui.model.json.JSONModel([ 
-    { value: 50, name: "Joe" }, 
-    { value: 50, name: "Mary" }, 
-    { value: 50, name: "John" }, 
-    { value: 50, name: "Kai" }, 
-  ]);
+    <script id="jsbin-javascript">
+        jQuery(function() {
+            var oModel = new sap.ui.model.json.JSONModel([{
+                value: 50,
+                name: "Joe"
+            }, {
+                value: 50,
+                name: "Mary"
+            }, {
+                value: 50,
+                name: "John"
+            }, {
+                value: 50,
+                name: "Kai"
+            }, ]);
 
-  var oTable = new sap.m.Table({
-    mode: sap.m.ListMode.MultiSelect,
-    columns: [
-      new sap.m.Column({ header: new sap.m.Label({text: "Name"})}),
-      new sap.m.Column({ header: new sap.m.Label({text: "Value"})})
-    ],
-    items: {
-      path: "/",
-      template: new sap.m.ColumnListItem({
-        cells: [
-          new sap.m.Text({ text: "{name}" }),
-          new sap.m.Text({ text: "{value}" })
-        ]
-      })
-    },
-  });
-  
-  oTable.setModel(oModel);
-  oTable.placeAt('content');
-  
-  new sap.m.Button({
-    text: 'Check',
-    press: function() {
-      var contexts = oTable.getSelectedContexts();
-      var items = contexts.map(function(c) {
-        return c.getObject();
-      });
-      sap.m.MessageToast.show(JSON.stringify(items));
-    }
-  }).placeAt('content');
-});
+            var oTable = new sap.m.Table({
+                mode: sap.m.ListMode.MultiSelect,
+                columns: [
+                    new sap.m.Column({
+                        header: new sap.m.Label({
+                            text: "Name"
+                        })
+                    }),
+                    new sap.m.Column({
+                        header: new sap.m.Label({
+                            text: "Value"
+                        })
+                    })
+                ],
+                items: {
+                    path: "/",
+                    template: new sap.m.ColumnListItem({
+                        cells: [
+                            new sap.m.Text({
+                                text: "{name}"
+                            }),
+                            new sap.m.Text({
+                                text: "{value}"
+                            })
+                        ]
+                    })
+                },
+            });
 
+            oTable.setModel(oModel);
+            oTable.placeAt('content');
 
-</script>
+            new sap.m.Button({
+                text: 'Check',
+                press: function() {
+                    var contexts = oTable.getSelectedContexts();
+                    var items = contexts.map(function(c) {
+                        return c.getObject();
+                    });
+                    sap.m.MessageToast.show(JSON.stringify(items));
+                }
+            }).placeAt('content');
+        });
+    </script>
 </body>
+
 </html>

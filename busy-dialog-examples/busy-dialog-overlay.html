@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
- <script id="sap-ui-bootstrap"
-				data-sap-ui-theme="sap_bluecrystal"
-				type="text/javascript"
-				data-sap-ui-libs="sap.ui.unified, sap.ui.commons, sap.m"
-src="https://openui5.hana.ondemand.com/resources/sap-ui-core-dbg.js" 
-						>
-		</script>
+    <script id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" type="text/javascript" data-sap-ui-libs="sap.ui.unified, sap.ui.commons, sap.m" src="https://openui5.hana.ondemand.com/resources/sap-ui-core-dbg.js">
+    </script>
 
-		<script type="text/javascript">
+    <script type="text/javascript">
+        var oResetButtonUpload = new sap.m.Button({
+            text: "Start Upload",
+            press: function(oEvent) {
+                debugger;
+                var bd = new sap.m.BusyDialog();
 
+                jQuery.sap.delayedCall(100, this, function() {
+                    bd.open();
+                });
 
-                    
-          var oResetButtonUpload = new sap.m.Button({
-				text: "Start Upload",
-				press: function (oEvent) {
-                  debugger;
-                  var bd = new sap.m.BusyDialog();
-                  
-                  jQuery.sap.delayedCall(100, this, function () { bd.open(); });
-                  
-                  new sap.ui.model.json.JSONModel().loadData(
-"http://adobe.github.io/Spry/data/json/object-02.js", null, false);
-                  
-                  jQuery.sap.delayedCall(150, this, function () { bd.close(); });
-				}
-			});
-          
-          oResetButtonUpload.placeAt("reset-tests");
-		</script>
-	</head>
+                new sap.ui.model.json.JSONModel().loadData(
+                    "http://adobe.github.io/Spry/data/json/object-02.js", null, false);
 
-	<body class="sapUiBody" role="application">
-		
-		<p>
-			<div id="target1"></div>
-		</p>
-  <div id="reset-tests"></div>
-	</body>
+                jQuery.sap.delayedCall(150, this, function() {
+                    bd.close();
+                });
+            }
+        });
+
+        oResetButtonUpload.placeAt("reset-tests");
+    </script>
+</head>
+
+<body class="sapUiBody" role="application">
+
+    <p>
+        <div id="target1"></div>
+    </p>
+    <div id="reset-tests"></div>
+</body>
+
 </html>

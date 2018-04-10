@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
-  <meta name="description" content="OpenUI5 BIN Starting template" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href=" http://mottie.github.io/Keyboard/css/keyboard.css" >
-  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
-          id="sap-ui-bootstrap" 
-          data-sap-ui-theme="sap_bluecrystal" 
-          data-sap-ui-libs="sap.ui.commons,sap.m"></script>
-  <script src="http://mottie.github.io/Keyboard/js/jquery.keyboard.js">
-  </script>
+    <meta name="description" content="OpenUI5 BIN Starting template" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href=" http://mottie.github.io/Keyboard/css/keyboard.css">
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.ui.commons,sap.m"></script>
+    <script src="http://mottie.github.io/Keyboard/js/jquery.keyboard.js">
+    </script>
 </head>
 
 <body class="sapUiBody">
-  <div id="content"></div> 
-<script id="jsbin-javascript">
-sap.m.Input.extend('VirtualKeyBoard', {
-  renderer: {},
-  onAfterRendering: function() {
-    if (sap.m.Input.prototype.onAfterRendering) {
-      sap.m.Input.prototype.onAfterRendering.apply(this, arguments);
-    }
-    this.$().find('INPUT').keyboard();
-  }
-});
+    <div id="content"></div>
+    <script id="jsbin-javascript">
+        sap.m.Input.extend('VirtualKeyBoard', {
+            renderer: {},
+            onAfterRendering: function() {
+                if (sap.m.Input.prototype.onAfterRendering) {
+                    sap.m.Input.prototype.onAfterRendering.apply(this, arguments);
+                }
+                this.$().find('INPUT').keyboard();
+            }
+        });
 
-var kb = new VirtualKeyBoard();
-kb.placeAt('content');
-
-</script>
+        var kb = new VirtualKeyBoard();
+        kb.placeAt('content');
+    </script>
 </body>
+
 </html>

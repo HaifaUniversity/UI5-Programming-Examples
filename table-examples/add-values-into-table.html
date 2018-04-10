@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
-  <meta name="description" content="OpenUI5 BIN Starting template" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta charset="utf-8">
-  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
-          id="sap-ui-bootstrap" 
-          data-sap-ui-theme="sap_bluecrystal" 
-          data-sap-ui-libs="sap.ui.commons,sap.ui.table"></script>
+    <meta name="description" content="OpenUI5 BIN Starting template" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.ui.commons,sap.ui.table"></script>
 </head>
 
 <body class="sapUiBody">
-  <div id="content"></div> 
-<script id="jsbin-javascript">
+    <div id="content"></div>
+    <script id="jsbin-javascript">
+        var oTable = new sap.ui.table.Table({
+            selectionMode: sap.ui.table.SelectionMode.None,
+        });
+
+        oTable.addColumn(new sap.ui.table.Column({
+            label: new sap.ui.commons.Label({
+                text: "Value"
+            }),
+            template: new sap.ui.commons.TextView({
+                text: "{value}"
+            })
+        }));
+        oTable.bindRows("/");
 
 
+        var model = new sap.ui.model.json.JSONModel({
+            d: {
+                results: []
+            }
+        });
+
+        var fields = [];
+        for (var i = 0; i < 10; i++) {
+            fields.push(new sap.ui.commons.TextField());
+        }
+
+        fields.forEach(function(f) {
+            f.placeAt('content');
+        });
+
+        (new sap.ui.commons.Button({
+            text: 'Add',
+            press: function() {
+                var m = oTable.getModel();
+                var arr = fields.map(function(f) {
+                    return {
+                        value: f.getValue()
+                    };
+                });
+                m.setProperty('/d/results', arr);
+            }
+        })).placeAt('content');
 
 
-var oTable = new sap.ui.table.Table({
-  selectionMode: sap.ui.table.SelectionMode.None,
-});
-
-oTable.addColumn(new sap.ui.table.Column({
-  label: new sap.ui.commons.Label({text: "Value"}),
-  template: new sap.ui.commons.TextView({text:"{value}"})
-}));
-oTable.bindRows("/");
-
-
-var model = new sap.ui.model.json.JSONModel({
-  d: {
-    results: [] 
-  }
-});
-
-var fields = [];
-for (var i = 0; i < 10; i++) {
-  fields.push(new sap.ui.commons.TextField());
-}
-
-fields.forEach(function(f) {
-  f.placeAt('content');
-});
-
-(new sap.ui.commons.Button({
-  text: 'Add',
-  press: function() {
-    var m = oTable.getModel();
-    var arr = fields.map(function(f) {
-      return {value: f.getValue()};
-    });
-    m.setProperty('/d/results', arr);
-  }
-})).placeAt('content');
-
-
-oTable.bindRows("/d/results");
-oTable.setModel(model);
-oTable.placeAt('content');
-
-
-
-
-
-
-
-
-</script>
+        oTable.bindRows("/d/results");
+        oTable.setModel(model);
+        oTable.placeAt('content');
+    </script>
 </body>
+
 </html>

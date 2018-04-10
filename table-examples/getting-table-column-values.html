@@ -1,110 +1,93 @@
 <meta name="robots" content="noindex">
 <html>
-  <head>
+
+<head>
     <meta name="description" content="Table Columns to Array" />
     <title>Table Columns to Array</title>
-    <script
-      src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"        
-      id="sap-ui-bootstrap"
-      data-sap-ui-theme="sap_bluecrystal"        
-      data-sap-ui-libs="sap.m"
-      data-sap-ui-xx-bindingSyntax="complex"
-      data-sap-ui-resourceroots='{"com.App": "./"}'>
-    </script>    
-    
+    <script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m" data-sap-ui-xx-bindingSyntax="complex" data-sap-ui-resourceroots='{"com.App": "./"}'>
+    </script>
+
     <script id="idView" type="xmlview">
-      <mvc:View
-        controllerName="com.App"
-        displayBlock="true"
-        xmlns="sap.m"
-        xmlns:mvc="sap.ui.core.mvc"  >
-        <Page
-          title="Table Columns to Array">
-          <content>
-            <Table
-              id="idTable"
-              mode="MultiSelect"
-              items="{
+        <mvc:View controllerName="com.App" displayBlock="true" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+            <Page title="Table Columns to Array">
+                <content>
+                    <Table id="idTable" mode="MultiSelect" items="{
                 path:'/ItemSet'
               }">
-              <columns>
-                <Column>
-                  <header>
-                    <Text text="ID" />
-                  </header>
-                </Column>
-                <Column>
-                  <header>
-                    <Text text="Fruit" />
-                  </header>
-                </Column>                
-              </columns>
-              <ColumnListItem>
-                <Text text="{ID}" />
-                <Text text="{Fruit}" /> 
-              </ColumnListItem>
-            </Table>
-          </content>
-          <footer>
-            <Bar>
-                <contentMiddle>
-                  <Button
-                    press="onArray"
-                    text="Get Array">
+                        <columns>
+                            <Column>
+                                <header>
+                                    <Text text="ID" />
+                                </header>
+                            </Column>
+                            <Column>
+                                <header>
+                                    <Text text="Fruit" />
+                                </header>
+                            </Column>
+                        </columns>
+                        <ColumnListItem>
+                            <Text text="{ID}" />
+                            <Text text="{Fruit}" />
+                        </ColumnListItem>
+                    </Table>
+                </content>
+                <footer>
+                    <Bar>
+                        <contentMiddle>
+                            <Button press="onArray" text="Get Array">
                   </Button>
-                </contentMiddle>
-            </Bar>
-          </footer>
-        </Page>
-      </mvc:View>
-      
+                        </contentMiddle>
+                    </Bar>
+                </footer>
+            </Page>
+        </mvc:View>
+
     </script>
-    
-  </head>
-  <body class='sapUiBody' id="content"><script id="jsbin-javascript">
-sap.ui.controller("com.App", {
-  
-  onInit: function(){
-    var oModel = new sap.ui.model.json.JSONModel({
-      ItemSet : [
-	    {
-          "ID": 1,
-          "Fruit": "Apple",
-          "Enabled": "X"     
-        },
-        {
-          "ID": 2,
-          "Fruit": "Banana",
-          "Enabled": ""     
-        },
-        {
-          "ID": 3,
-          "Fruit": "Blueberry",
-          "Enabled": "X"     
-        }
-      ]
-    });
-    oModel.setDefaultBindingMode("TwoWay");
-    this.getView().setModel(oModel);
-  },
-  
-  onArray: function(){
-    var oTable = this.getView().byId('idTable');
-    var aItems = oTable.getItems();
-    var aArray = [];
-    for(i=0,len=aItems.length;i<len;i++){
-      aArray.push(aItems[i].getAggregation("cells")[1].getProperty("text"));
-    }
-    alert(aArray);
-    
-  }
-  
-});
 
-var oView = sap.ui.xmlview("idView", {
-  viewContent: jQuery('#idView').html()
-}).placeAt('content');
+</head>
 
-</script>
+<body class='sapUiBody' id="content">
+    <script id="jsbin-javascript">
+        sap.ui.controller("com.App", {
+
+            onInit: function() {
+                var oModel = new sap.ui.model.json.JSONModel({
+                    ItemSet: [{
+                        "ID": 1,
+                        "Fruit": "Apple",
+                        "Enabled": "X"
+                    }, {
+                        "ID": 2,
+                        "Fruit": "Banana",
+                        "Enabled": ""
+                    }, {
+                        "ID": 3,
+                        "Fruit": "Blueberry",
+                        "Enabled": "X"
+                    }]
+                });
+                oModel.setDefaultBindingMode("TwoWay");
+                this.getView().setModel(oModel);
+            },
+
+            onArray: function() {
+                var oTable = this.getView().byId('idTable');
+                var aItems = oTable.getItems();
+                var aArray = [];
+                for (i = 0, len = aItems.length; i < len; i++) {
+                    aArray.push(aItems[i].getAggregation("cells")[1].getProperty("text"));
+                }
+                alert(aArray);
+
+            }
+
+        });
+
+        var oView = sap.ui.xmlview("idView", {
+            viewContent: jQuery('#idView').html()
+        }).placeAt('content');
+    </script>
 </body>
+
 </html>

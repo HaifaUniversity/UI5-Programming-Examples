@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>JS Bin</title>
-    <script 
-            src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
-            id="sap-ui-bootstrap" 
-            data-sap-ui-theme="sap_bluecrystal" 
-            data-sap-ui-xx-bindingSyntax="complex"
-            data-sap-ui-libs="sap.m"></script>
-  </head>
-  <body class="sapUiBody">
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-xx-bindingSyntax="complex" data-sap-ui-libs="sap.m"></script>
+</head>
+
+<body class="sapUiBody">
     <div id='content'></div>
-  <script id="jsbin-javascript">
-
-var oModel = new sap.ui.model.json.JSONModel({
-  data: [  
-  {key:"1",text:"Next Week",Country:"USA"},  
-  {key:"2",text:"Next Month",Country:"England"},  
-  {key:"3",text:"Tomorrow",Country:"Africa"}  
-],
-  selected: ''
-});  
-sap.ui.getCore().setModel(oModel);  
-
-
-var oCB = new sap.m.ComboBox({  
-  items : {  
-    path : "/data",  
-    template : new sap.ui.core.ListItem({  
-      key  : "{key}",  
-      text : "{text} {Country}"  
-    })
-  },
-  selectionChange: function() {
-    var obj = oCB.getSelectedItem().getBindingContext().getObject();
-    var model = sap.ui.getCore().getModel(); 
-    model.setProperty('/selected', obj.text); 
-  }
-});
-
-var oInput = sap.m.Input({
-  value: '{/selected}'
-});
-oCB.placeAt("content");
-oInput.placeAt("content");
+    <script id="jsbin-javascript">
+        var oModel = new sap.ui.model.json.JSONModel({
+            data: [{
+                key: "1",
+                text: "Next Week",
+                Country: "USA"
+            }, {
+                key: "2",
+                text: "Next Month",
+                Country: "England"
+            }, {
+                key: "3",
+                text: "Tomorrow",
+                Country: "Africa"
+            }],
+            selected: ''
+        });
+        sap.ui.getCore().setModel(oModel);
 
 
+        var oCB = new sap.m.ComboBox({
+            items: {
+                path: "/data",
+                template: new sap.ui.core.ListItem({
+                    key: "{key}",
+                    text: "{text} {Country}"
+                })
+            },
+            selectionChange: function() {
+                var obj = oCB.getSelectedItem().getBindingContext().getObject();
+                var model = sap.ui.getCore().getModel();
+                model.setProperty('/selected', obj.text);
+            }
+        });
 
-
-</script>
+        var oInput = sap.m.Input({
+            value: '{/selected}'
+        });
+        oCB.placeAt("content");
+        oInput.placeAt("content");
+    </script>
 </body>
+
 </html>

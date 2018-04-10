@@ -1,95 +1,92 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>JS Bin</title>
-    <script 
-            src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
-            id="sap-ui-bootstrap" 
-            data-sap-ui-theme="sap_bluecrystal" 
-            data-sap-ui-xx-bindingSyntax="complex" 
-            data-sap-ui-libs="sap.m"></script>
-  <style id="jsbin-css">
-.InputWithFloatLabel {
-  background-color: #fff;
-}
-
-.InputWithFloatLabel>input {
-  border: 0px;
-  height: 30px;
-}
-
-.InputWithFloatLabel>input:hover {
-  border: 0px;
-}
-
-.InputWithFloatLabel .floatLabel {
-  font-size: 0.8rem;
-  margin-left: 10px;
-  color: #666666;
-}
-
-.InputWithFloatLabel .floatLabelFocus {
-  color: #007cc0;
-}
-</style>
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-xx-bindingSyntax="complex" data-sap-ui-libs="sap.m"></script>
+    <style id="jsbin-css">
+        .InputWithFloatLabel {
+            background-color: #fff;
+        }
+        
+        .InputWithFloatLabel>input {
+            border: 0px;
+            height: 30px;
+        }
+        
+        .InputWithFloatLabel>input:hover {
+            border: 0px;
+        }
+        
+        .InputWithFloatLabel .floatLabel {
+            font-size: 0.8rem;
+            margin-left: 10px;
+            color: #666666;
+        }
+        
+        .InputWithFloatLabel .floatLabelFocus {
+            color: #007cc0;
+        }
+    </style>
 </head>
-  <body class="sapUiBody">
+
+<body class="sapUiBody">
     <div id='content'></div>
-  <script id="jsbin-javascript">
-sap.m.Input.extend('InputWithFloatLabel', {
-  renderer: {},
-  onAfterRendering: function() {
-    if (sap.m.Input.prototype.onAfterRendering) {
-      sap.m.Input.prototype.onAfterRendering.apply(this, arguments);
-    }
+    <script id="jsbin-javascript">
+        sap.m.Input.extend('InputWithFloatLabel', {
+            renderer: {},
+            onAfterRendering: function() {
+                if (sap.m.Input.prototype.onAfterRendering) {
+                    sap.m.Input.prototype.onAfterRendering.apply(this, arguments);
+                }
 
-    var floatLabel = $('<div class="floatLabel"></div>');
-    floatLabel.attr('id', this.getId() + '-floatLabel');
-    
-    var $this = this.$();
-    $this.prepend(floatLabel);
-    
-    if (this.getValue()) {
-      floatLabel.html(this.getPlaceholder());
-    } else {
-      floatLabel.html('&nbsp;');
-    }
- 
-    $this.addClass('InputWithFloatLabel'); 
-    
-    $this.find('INPUT').focus(function() {
-      floatLabel.addClass('floatLabelFocus')
-    });
-    
-    $this.find('INPUT').blur(function() {
-      floatLabel.removeClass('floatLabelFocus')
-    });
-  },
-  
-  _setLabelVisibility: function() {
-    sap.m.Input.prototype._setLabelVisibility.apply(this, arguments);
-    
-    var floatLabel = $('#' + this.getId() + '-floatLabel');
-    if (this._getInputValue()) {
-      floatLabel.html(this.getPlaceholder());
-    } else {
-      floatLabel.html('&nbsp;');
-    }
-  }
-});
+                var floatLabel = $('<div class="floatLabel"></div>');
+                floatLabel.attr('id', this.getId() + '-floatLabel');
 
-// -- end of custom control
+                var $this = this.$();
+                $this.prepend(floatLabel);
 
+                if (this.getValue()) {
+                    floatLabel.html(this.getPlaceholder());
+                } else {
+                    floatLabel.html('&nbsp;');
+                }
 
+                $this.addClass('InputWithFloatLabel');
+
+                $this.find('INPUT').focus(function() {
+                    floatLabel.addClass('floatLabelFocus')
+                });
+
+                $this.find('INPUT').blur(function() {
+                    floatLabel.removeClass('floatLabelFocus')
+                });
+            },
+
+            _setLabelVisibility: function() {
+                sap.m.Input.prototype._setLabelVisibility.apply(this, arguments);
+
+                var floatLabel = $('#' + this.getId() + '-floatLabel');
+                if (this._getInputValue()) {
+                    floatLabel.html(this.getPlaceholder());
+                } else {
+                    floatLabel.html('&nbsp;');
+                }
+            }
+        });
+
+        // -- end of custom control
 
 
 
-(new InputWithFloatLabel({
-  placeholder: 'Test'
-})).placeAt('content');
 
-</script>
+
+        (new InputWithFloatLabel({
+            placeholder: 'Test'
+        })).placeAt('content');
+    </script>
 </body>
+
 </html>

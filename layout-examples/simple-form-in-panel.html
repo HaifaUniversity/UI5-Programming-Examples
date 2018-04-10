@@ -1,61 +1,61 @@
 <meta name="robots" content="noindex">
 
-    <script id="sap-ui-bootstrap"
-            src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
-            data-sap-ui-theme="sap_bluecrystal"
-            data-sap-ui-libs="sap.m, sap.ui.layout"
-            data-sap-ui-xx-bindingSyntax="complex" >
-    </script>
- 
-    <script>
-        // example with a form
- 
-        // this example should point differences between a XML view
-        // and how the same control could be instantiated with JavaScript
- 
-        // at the end of the page there is the corresponding xml view as a comment
-        var app = new sap.m.App("helloWorldApp", {initialPage:"page1"});
- 
-        // --- create page 1 ---
-        var oPage1 = new sap.m.Page("page1", {
-            title: "Simple Form page"
-        });
- 
-        oPage1.addStyleClass("sapUiFioriObjectPage");
- 
-        // create the form instance
-        var oSimpleForm = new sap.ui.layout.form.SimpleForm({
-            minWidth: 1024,
-            maxContainerCols : 2,
-            title: new sap.ui.core.Title({text: "A form"}),
-            content : [
-                new sap.m.Label({
-                    text: "My Label"
-                }),
-                new sap.m.Text({
-                    text: "My Text"
-                })
-            ]
-        });
- 
-        oPage1.addContent(oSimpleForm);
- 
-        // --- add page ---
-        app.addPage(oPage1);
- 
-        app.placeAt("uiArea");
-    </script>
- 
-    <script>
-        // the corresponing xml-view would look like this
- 
-        // --- look at the namesapce f and how it is used with the simple form ---
-        // <mvc:View xmlns:f="sap.ui.layout.form"
-        // and <f:SimpleForm
- 
-        // because f means sap.ui.layout.form in JavaScript we must create
-        // the same element with new sap.ui.layout.form.SimpleForm({...});
-        /*
+<script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m, sap.ui.layout" data-sap-ui-xx-bindingSyntax="complex">
+</script>
+
+<script>
+    // example with a form
+
+    // this example should point differences between a XML view
+    // and how the same control could be instantiated with JavaScript
+
+    // at the end of the page there is the corresponding xml view as a comment
+    var app = new sap.m.App("helloWorldApp", {
+        initialPage: "page1"
+    });
+
+    // --- create page 1 ---
+    var oPage1 = new sap.m.Page("page1", {
+        title: "Simple Form page"
+    });
+
+    oPage1.addStyleClass("sapUiFioriObjectPage");
+
+    // create the form instance
+    var oSimpleForm = new sap.ui.layout.form.SimpleForm({
+        minWidth: 1024,
+        maxContainerCols: 2,
+        title: new sap.ui.core.Title({
+            text: "A form"
+        }),
+        content: [
+            new sap.m.Label({
+                text: "My Label"
+            }),
+            new sap.m.Text({
+                text: "My Text"
+            })
+        ]
+    });
+
+    oPage1.addContent(oSimpleForm);
+
+    // --- add page ---
+    app.addPage(oPage1);
+
+    app.placeAt("uiArea");
+</script>
+
+<script>
+    // the corresponing xml-view would look like this
+
+    // --- look at the namesapce f and how it is used with the simple form ---
+    // <mvc:View xmlns:f="sap.ui.layout.form"
+    // and <f:SimpleForm
+
+    // because f means sap.ui.layout.form in JavaScript we must create
+    // the same element with new sap.ui.layout.form.SimpleForm({...});
+    /*
  
          <mvc:View
          xmlns:f="sap.ui.layout.form"
@@ -85,13 +85,11 @@
          </mvc:View>
  
          */
- 
-    </script>
- 
-</head>
-<body class="sapUiBody" role="application" id="uiArea">
-<script id="jsbin-javascript">
-
-
 </script>
+
+</head>
+
+<body class="sapUiBody" role="application" id="uiArea">
+    <script id="jsbin-javascript">
+    </script>
 </body>

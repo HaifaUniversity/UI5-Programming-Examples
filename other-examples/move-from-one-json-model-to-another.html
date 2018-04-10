@@ -1,88 +1,91 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
-<head>
-  <meta name="description" content="OpenUI5 BIN Starting template" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta charset="utf-8">
-  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
-          id="sap-ui-bootstrap" 
-          data-sap-ui-theme="sap_bluecrystal" 
-          data-sap-ui-libs="sap.ui.commons,sap.m"></script>
-<style id="jsbin-css">
-.stretch>div:first-child {
-  width: 50%
-}
 
-.stretch>div:last-child {
-  width: 50%
-}
-</style>
+<head>
+    <meta name="description" content="OpenUI5 BIN Starting template" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.ui.commons,sap.m"></script>
+    <style id="jsbin-css">
+        .stretch>div:first-child {
+            width: 50%
+        }
+        
+        .stretch>div:last-child {
+            width: 50%
+        }
+    </style>
 </head>
 
 <body class="sapUiBody">
-  <div id="content"></div> 
-<script id="jsbin-javascript">
-var model = new sap.ui.model.json.JSONModel({
-  list1: [
-    {key: 'chrome', label: 'Chrome'},
-    {key: 'firefox', label: 'Firefox'},
-    {key: 'safari', label: 'Safari'}
-  ],  
-  list2: [
-    {key: 'ie', label: 'Internet Explorer'}
-  ],
-});
+    <div id="content"></div>
+    <script id="jsbin-javascript">
+        var model = new sap.ui.model.json.JSONModel({
+            list1: [{
+                key: 'chrome',
+                label: 'Chrome'
+            }, {
+                key: 'firefox',
+                label: 'Firefox'
+            }, {
+                key: 'safari',
+                label: 'Safari'
+            }],
+            list2: [{
+                key: 'ie',
+                label: 'Internet Explorer'
+            }],
+        });
 
-function moveItem(m, fromList, toList, idx) {
-  var list = m.getProperty(fromList);
-  var rm = list.splice(idx, 1);
-  m.setProperty(fromList, list);
-  m.setProperty(toList, m.getProperty(toList).concat(rm));
-  m.refresh();
-}
+        function moveItem(m, fromList, toList, idx) {
+            var list = m.getProperty(fromList);
+            var rm = list.splice(idx, 1);
+            m.setProperty(fromList, list);
+            m.setProperty(toList, m.getProperty(toList).concat(rm));
+            m.refresh();
+        }
 
-var hbox = new sap.m.HBox({
-  items: [
-    new sap.m.List({
-      mode: sap.m.ListMode.SingleSelectMaster,
-      items: {
-        path: '/list1',
-        template: new sap.m.StandardListItem({
-          title: '{label}',
-        })
-      },
-      selectionChange: function(e) {
-        var cxt = e.getParameter('listItem').getBindingContext();
-        var path = cxt.getPath();
-        path = path.substring(path.lastIndexOf('/') +1);
-        var idx = parseInt(path);
-        moveItem(this.getModel(), '/list1', '/list2', idx);
-      }
-    }),
-    new sap.m.List({
-      mode: sap.m.ListMode.SingleSelectMaster,
-      items: {
-        path: '/list2',
-        template: new sap.m.StandardListItem({
-          title: '{label}'
-        })
-      },
-      selectionChange: function(e) {
-        var cxt = e.getParameter('listItem').getBindingContext();
-        var path = cxt.getPath();
-        path = path.substring(path.lastIndexOf('/') +1);
-        var idx = parseInt(path);
-        moveItem(this.getModel(), '/list2', '/list1', idx);
-      }
-    })
-  ]
-}).addStyleClass('stretch');
+        var hbox = new sap.m.HBox({
+            items: [
+                new sap.m.List({
+                    mode: sap.m.ListMode.SingleSelectMaster,
+                    items: {
+                        path: '/list1',
+                        template: new sap.m.StandardListItem({
+                            title: '{label}',
+                        })
+                    },
+                    selectionChange: function(e) {
+                        var cxt = e.getParameter('listItem').getBindingContext();
+                        var path = cxt.getPath();
+                        path = path.substring(path.lastIndexOf('/') + 1);
+                        var idx = parseInt(path);
+                        moveItem(this.getModel(), '/list1', '/list2', idx);
+                    }
+                }),
+                new sap.m.List({
+                    mode: sap.m.ListMode.SingleSelectMaster,
+                    items: {
+                        path: '/list2',
+                        template: new sap.m.StandardListItem({
+                            title: '{label}'
+                        })
+                    },
+                    selectionChange: function(e) {
+                        var cxt = e.getParameter('listItem').getBindingContext();
+                        var path = cxt.getPath();
+                        path = path.substring(path.lastIndexOf('/') + 1);
+                        var idx = parseInt(path);
+                        moveItem(this.getModel(), '/list2', '/list1', idx);
+                    }
+                })
+            ]
+        }).addStyleClass('stretch');
 
-hbox.placeAt('content');
-hbox.setModel(model);
-
-
-</script>
+        hbox.placeAt('content');
+        hbox.setModel(model);
+    </script>
 </body>
+
 </html>

@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
-<head>
-<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.ui.layout,sap.ui.commons"></script>
-  <meta charset="utf-8">
-  <title>JS Bin</title>
-</head>
-<body class="sapUiBody">
-  <div id='content'></div>
-<script id="jsbin-javascript">
-var rb = new sap.ui.commons.RadioButtonGroup({  
-  columns:4,  
-  items:[new sap.ui.core.Item({key: '1', text:"radio1"}),  
-         new sap.ui.core.Item({key: '2', text:"radio2"}),  
-         new sap.ui.core.Item({key: '3', text:"radio3"})  
-        ]  
-})
 
-var oform = new sap.ui.layout.form.SimpleForm({  
-  maxContainerCols:4,  
-  editable:true,  
-  content:[  
-    rb,  
-    new sap.ui.commons.Button("b1",{  
-      text:"Submit",  
-      width:"100px",  
-      press:function() {
-        var idx = rb.getSelectedIndex();
-        alert(idx +1);
-      }  
-    })  
-  ]  
-});  
-oform.placeAt("content");  
-</script>
+<head>
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.ui.layout,sap.ui.commons"></script>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+</head>
+
+<body class="sapUiBody">
+    <div id='content'></div>
+    <script id="jsbin-javascript">
+        var rb = new sap.ui.commons.RadioButtonGroup({
+            columns: 4,
+            items: [new sap.ui.core.Item({
+                    key: '1',
+                    text: "radio1"
+                }),
+                new sap.ui.core.Item({
+                    key: '2',
+                    text: "radio2"
+                }),
+                new sap.ui.core.Item({
+                    key: '3',
+                    text: "radio3"
+                })
+            ]
+        })
+
+        var oform = new sap.ui.layout.form.SimpleForm({
+            maxContainerCols: 4,
+            editable: true,
+            content: [
+                rb,
+                new sap.ui.commons.Button("b1", {
+                    text: "Submit",
+                    width: "100px",
+                    press: function() {
+                        var idx = rb.getSelectedIndex();
+                        alert(idx + 1);
+                    }
+                })
+            ]
+        });
+        oform.placeAt("content");
+    </script>
 </body>
+
 </html>

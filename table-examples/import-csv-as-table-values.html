@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
-<html><head>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
-	<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
-	<title>test</title>
+<html>
 
-	<script id='sap-ui-bootstrap' type='text/javascript'
-		src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'
-		data-sap-ui-theme='sap_goldreflection'
-		data-sap-ui-libs='sap.ui.commons,sap.ui.layout, sap.ui.unified'></script>
+<head>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+    <title>test</title>
 
-	<script>
-		var f = new sap.ui.unified.FileUploader({ 
-          uploadUrl : "",
-          buttonText : "Upload",  
-          fileType : "csv",  
-          maximumFileSize : 1,
-          buttonOnly : true,
-          icon : "sap-icon://upload",
-          change : function(e){
-          var file = e.getParameter("files") && e.getParameter("files")[0];
-           if(file && window.FileReader){  
-              var reader = new FileReader();  
-              var that = this;  
-              reader.onload = function(evn) {  
-                var strCSV= evn.target.result; //string in CSV 
-                  alert(strCSV);
-                };
-              reader.readAsText(file);  
-            }
+    <script id='sap-ui-bootstrap' type='text/javascript' src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js' data-sap-ui-theme='sap_goldreflection' data-sap-ui-libs='sap.ui.commons,sap.ui.layout, sap.ui.unified'></script>
+
+    <script>
+        var f = new sap.ui.unified.FileUploader({
+            uploadUrl: "",
+            buttonText: "Upload",
+            fileType: "csv",
+            maximumFileSize: 1,
+            buttonOnly: true,
+            icon: "sap-icon://upload",
+            change: function(e) {
+                var file = e.getParameter("files") && e.getParameter("files")[0];
+                if (file && window.FileReader) {
+                    var reader = new FileReader();
+                    var that = this;
+                    reader.onload = function(evn) {
+                        var strCSV = evn.target.result; //string in CSV 
+                        alert(strCSV);
+                    };
+                    reader.readAsText(file);
+                }
             }
         });
-		
-		f.placeAt('content');
-	</script>
+
+        f.placeAt('content');
+    </script>
 
 </head>
+
 <body class='sapUiBody'>
-	<div id='content'></div>
+    <div id='content'></div>
 </body>
+
 </html>

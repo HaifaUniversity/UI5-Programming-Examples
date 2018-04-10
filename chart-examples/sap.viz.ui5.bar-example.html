@@ -1,72 +1,90 @@
 <!DOCTYPE HTML>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.0.2/underscore.string.min.js"></script>
- 
-<script id="sap-ui-bootstrap"
-        src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
-        data-sap-ui-theme="sap_bluecrystal"
-        data-sap-ui-libs="sap.ui.commons,sap.ui.ux3, sap.ui.table,sap.m,sap.viz">
-</script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.0.2/underscore.string.min.js"></script>
+
+    <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.ui.commons,sap.ui.ux3, sap.ui.table,sap.m,sap.viz">
+    </script>
 
 
- 
-<script>
-  var oModel = new sap.ui.model.json.JSONModel({
-  businessData : [
-  {Country :"Canada",revenue:410.87,profit:-141.25, population:34789000},
-  {Country :"China",revenue:338.29,profit:133.82, population:1339724852},
-  {Country :"France",revenue:487.66,profit:348.76, population:65350000},
-  {Country :"Germany",revenue:470.23,profit:217.29, population:81799600},
-  {Country :"India",revenue:170.93,profit:117.00, population:1210193422},
-  {Country :"United States",revenue:905.08,profit:609.16, population:313490000}
-  ]
-  });
-  var oDataset = new sap.viz.ui5.data.FlattenedDataset("flat_data",{
-  dimensions : [
-  {
-  axis : 1, // must be one for the x-axis, 2 for y-axis
-  name : 'Country',
-  value : "{Country}"
-  }
-  ],
-  measures : [
-     // measure 1
-  {
-  name : 'Profit', // 'name' is used as label in the Legend
-  value : '{profit}' // 'value' defines the binding for the displayed value  
-  },
-  {
-  name : 'Revenue',
-  value : '{revenue}'
-  }
-  ],
-  data : {
-  path : "/businessData"
-  }
- 
-  });
-  var oBarChart = new sap.viz.ui5.Bar("bar",{
-  width : "80%",
-  height : "400px",
-  title : {
-  visible : true,
-  text : 'Profit and Revenue By Country'
-  },
-  dataset : oDataset
-  });
-  oBarChart.setModel(oModel);
-  oBarChart.placeAt("content");
-</script>
- 
- 
+
+    <script>
+        var oModel = new sap.ui.model.json.JSONModel({
+            businessData: [{
+                Country: "Canada",
+                revenue: 410.87,
+                profit: -141.25,
+                population: 34789000
+            }, {
+                Country: "China",
+                revenue: 338.29,
+                profit: 133.82,
+                population: 1339724852
+            }, {
+                Country: "France",
+                revenue: 487.66,
+                profit: 348.76,
+                population: 65350000
+            }, {
+                Country: "Germany",
+                revenue: 470.23,
+                profit: 217.29,
+                population: 81799600
+            }, {
+                Country: "India",
+                revenue: 170.93,
+                profit: 117.00,
+                population: 1210193422
+            }, {
+                Country: "United States",
+                revenue: 905.08,
+                profit: 609.16,
+                population: 313490000
+            }]
+        });
+        var oDataset = new sap.viz.ui5.data.FlattenedDataset("flat_data", {
+            dimensions: [{
+                axis: 1, // must be one for the x-axis, 2 for y-axis
+                name: 'Country',
+                value: "{Country}"
+            }],
+            measures: [
+                // measure 1
+                {
+                    name: 'Profit', // 'name' is used as label in the Legend
+                    value: '{profit}' // 'value' defines the binding for the displayed value  
+                }, {
+                    name: 'Revenue',
+                    value: '{revenue}'
+                }
+            ],
+            data: {
+                path: "/businessData"
+            }
+
+        });
+        var oBarChart = new sap.viz.ui5.Bar("bar", {
+            width: "80%",
+            height: "400px",
+            title: {
+                visible: true,
+                text: 'Profit and Revenue By Country'
+            },
+            dataset: oDataset
+        });
+        oBarChart.setModel(oModel);
+        oBarChart.placeAt("content");
+    </script>
+
+
 </head>
-<body class="sapUiBody" role="application"
-  style="width: 100%; height: 100%; overflow-y: hidden; overflow-x: auto;">
-  <div id="content"
-  style="width: 100%; height: 100%; overflow-y: hidden; overflow-x: auto;"></div>
+
+<body class="sapUiBody" role="application" style="width: 100%; height: 100%; overflow-y: hidden; overflow-x: auto;">
+    <div id="content" style="width: 100%; height: 100%; overflow-y: hidden; overflow-x: auto;"></div>
 </body>
+
 </html>

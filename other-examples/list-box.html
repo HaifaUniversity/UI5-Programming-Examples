@@ -1,58 +1,61 @@
 <!DOCTYPE HTML>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
-<script id="sap-ui-bootstrap"
-	src="https://sapui5.netweaver.ondemand.com/sdk/resources/sap-ui-core.js"
-	data-sap-ui-theme="sap_goldreflection"
-	data-sap-ui-libs="sap.ui.commons">	
-</script>
+    <script id="sap-ui-bootstrap" src="https://sapui5.netweaver.ondemand.com/sdk/resources/sap-ui-core.js" data-sap-ui-theme="sap_goldreflection" data-sap-ui-libs="sap.ui.commons">
+    </script>
 </head>
+
 <body class="sapUiBody" role="application">
-<div id="content"></div>
-<script id="jsbin-javascript">
-sap.ui.controller("view.Example", {});
+    <div id="content"></div>
+    <script id="jsbin-javascript">
+        sap.ui.controller("view.Example", {});
 
-sap.ui.jsview("view.Example", {
+        sap.ui.jsview("view.Example", {
 
-  /** Specifies the Controller belonging to this View. 
-		 * In the case that it is not implemented, or that "null" is returned, this View does not have a Controller.
-		 * @memberOf view.Example
-		 */
-  getControllerName : function() {
-    return "view.Example";
-  },
-  
-  /** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. 
-		 * Since the Controller is given to this method, its event handlers can be attached right away. 
-		 * @memberOf view.Example
-		 */
-  createContent : function(oController) {    
+            /** Specifies the Controller belonging to this View. 
+             * In the case that it is not implemented, or that "null" is returned, this View does not have a Controller.
+             * @memberOf view.Example
+             */
+            getControllerName: function() {
+                return "view.Example";
+            },
 
-    var list = sap.ui.commons.ListBox({allowMultiSelect: true, visibleItems: 10});    
-var oItem = new sap.ui.core.ListItem("Country1");
-oItem.setText("Canada");
-list.addItem(oItem);
-oItem = new sap.ui.core.ListItem("Country2");
-oItem.setText("Deutschland");
-list.addItem(oItem);
-oItem = new sap.ui.core.ListItem("Country3");
-oItem.setText("England");
-list.addItem(oItem);
+            /** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. 
+             * Since the Controller is given to this method, its event handlers can be attached right away. 
+             * @memberOf view.Example
+             */
+            createContent: function(oController) {
 
-    return list;
-  
-  }
+                var list = sap.ui.commons.ListBox({
+                    allowMultiSelect: true,
+                    visibleItems: 10
+                });
+                var oItem = new sap.ui.core.ListItem("Country1");
+                oItem.setText("Canada");
+                list.addItem(oItem);
+                oItem = new sap.ui.core.ListItem("Country2");
+                oItem.setText("Deutschland");
+                list.addItem(oItem);
+                oItem = new sap.ui.core.ListItem("Country3");
+                oItem.setText("England");
+                list.addItem(oItem);
 
-});
+                return list;
+
+            }
+
+        });
 
 
-var view = sap.ui.view( {
-  id : "Example",
-  viewName : "view.Example",
-  type : sap.ui.core.mvc.ViewType.JS
-});
-view.placeAt("content");
-</script>
+        var view = sap.ui.view({
+            id: "Example",
+            viewName: "view.Example",
+            type: sap.ui.core.mvc.ViewType.JS
+        });
+        view.placeAt("content");
+    </script>
 </body>
+
 </html>

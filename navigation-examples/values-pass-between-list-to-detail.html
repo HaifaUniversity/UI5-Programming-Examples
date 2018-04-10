@@ -1,102 +1,114 @@
 <!DOCTYPE HTML>
 <meta name="robots" content="noindex">
 <html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
-		
-		<title>Mobile App with data-bound List</title>
-		
-		<script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" 
-				id="sap-ui-bootstrap"
-				data-sap-ui-libs="sap.m,sap.ui.layout" 
-				data-sap-ui-xx-bindingSyntax="complex"
-				data-sap-ui-theme="sap_bluecrystal"></script>
-		<!-- load the mobile lib "sap.m", the layout lib and the "sap_bluecrystal" theme -->
-		
-		
-		<script type="text/javascript">
-			
-			// create the data
-			
-			// create some dummy JSON data
-			var data = {
-				names: [
-					{firstName: "Peter", lastName: "Mueller"},
-					{firstName: "Petra", lastName: "Maier"},
-					{firstName: "Thomas", lastName: "Smith"},
-					{firstName: "John", lastName: "Williams"},
-					{firstName: "Maria", lastName: "Jones"}
-				]
-			};
-			
-			// create a Model with this data
-			var model = new sap.ui.model.json.JSONModel();
-			model.setData(data);
-			
-			
-			// create the UI
-			
-			// create a List control
-			var list = new sap.m.List({
-				headerText:"Names"
-			});
-			
-			// bind the List items to the data collection
-			list.bindItems({
-				path : "/names", 
-				sorter : new sap.ui.model.Sorter("lastName"),
-				template : new sap.m.StandardListItem({
-					title: "{lastName}",
-					description: "{firstName}",
-					type: sap.m.ListType.Navigation,
-					press:function(evt){
-						var oBindingContext = evt.getSource().getBindingContext(); // evt.getSource() is the ListItem
-						page2.setBindingContext(oBindingContext); // make sure the detail page has the correct data context
-						app.to("page2");
-					}
-				})
-			});
-			
-			// create the page holding the List
-			var page1 = new sap.m.Page({
-				title: "List Page",
-				content : list
-			});
-			
-			// create the detail page
-			var page2 = new sap.m.Page("page2", {
-				title: "Detail Page",
-				showNavButton: true,
-				navButtonPress: function(){
-					app.back();
-				},
-				content : [
-					new sap.ui.layout.form.SimpleForm({ 
-						title: "Details for {firstName} {lastName}",
-						content: [
-							new sap.m.Label({text: "First Name"}),
-							new sap.m.Text({text: "{firstName}"}),
-							new sap.m.Label({text: "Last Name"}),
-							new sap.m.Text({text: "{lastName}"})
-						]
-					})
-				]
-			});
-			
-			// create a mobile App holding the pages and place the App into the HTML document
-			var app = new sap.m.App({
-				pages: [page1, page2]
-			}).placeAt("content");
-			
-			// set the model to the App; it will be propagated to the children
-			app.setModel(model);
-			
-		</script>
-		
-	</head>
-	<body id="content" class="sapUiBody">
-	</body>
-</html>
 
-  
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+
+    <title>Mobile App with data-bound List</title>
+
+    <script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-libs="sap.m,sap.ui.layout" data-sap-ui-xx-bindingSyntax="complex" data-sap-ui-theme="sap_bluecrystal"></script>
+    <!-- load the mobile lib "sap.m", the layout lib and the "sap_bluecrystal" theme -->
+
+
+    <script type="text/javascript">
+        // create the data
+
+        // create some dummy JSON data
+        var data = {
+            names: [{
+                firstName: "Peter",
+                lastName: "Mueller"
+            }, {
+                firstName: "Petra",
+                lastName: "Maier"
+            }, {
+                firstName: "Thomas",
+                lastName: "Smith"
+            }, {
+                firstName: "John",
+                lastName: "Williams"
+            }, {
+                firstName: "Maria",
+                lastName: "Jones"
+            }]
+        };
+
+        // create a Model with this data
+        var model = new sap.ui.model.json.JSONModel();
+        model.setData(data);
+
+
+        // create the UI
+
+        // create a List control
+        var list = new sap.m.List({
+            headerText: "Names"
+        });
+
+        // bind the List items to the data collection
+        list.bindItems({
+            path: "/names",
+            sorter: new sap.ui.model.Sorter("lastName"),
+            template: new sap.m.StandardListItem({
+                title: "{lastName}",
+                description: "{firstName}",
+                type: sap.m.ListType.Navigation,
+                press: function(evt) {
+                    var oBindingContext = evt.getSource().getBindingContext(); // evt.getSource() is the ListItem
+                    page2.setBindingContext(oBindingContext); // make sure the detail page has the correct data context
+                    app.to("page2");
+                }
+            })
+        });
+
+        // create the page holding the List
+        var page1 = new sap.m.Page({
+            title: "List Page",
+            content: list
+        });
+
+        // create the detail page
+        var page2 = new sap.m.Page("page2", {
+            title: "Detail Page",
+            showNavButton: true,
+            navButtonPress: function() {
+                app.back();
+            },
+            content: [
+                new sap.ui.layout.form.SimpleForm({
+                    title: "Details for {firstName} {lastName}",
+                    content: [
+                        new sap.m.Label({
+                            text: "First Name"
+                        }),
+                        new sap.m.Text({
+                            text: "{firstName}"
+                        }),
+                        new sap.m.Label({
+                            text: "Last Name"
+                        }),
+                        new sap.m.Text({
+                            text: "{lastName}"
+                        })
+                    ]
+                })
+            ]
+        });
+
+        // create a mobile App holding the pages and place the App into the HTML document
+        var app = new sap.m.App({
+            pages: [page1, page2]
+        }).placeAt("content");
+
+        // set the model to the App; it will be propagated to the children
+        app.setModel(model);
+    </script>
+
+</head>
+
+<body id="content" class="sapUiBody">
+</body>
+
+</html>

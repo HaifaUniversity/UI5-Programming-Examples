@@ -1,103 +1,121 @@
 <!DOCTYPE HTML>
 <meta name="robots" content="noindex">
 <html>
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
-		
-		<title>Mobile App with data-bound List</title>
-		
-		<script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" 
-				id="sap-ui-bootstrap"
-				data-sap-ui-libs="sap.m,sap.ui.layout" 
-				data-sap-ui-xx-bindingSyntax="complex"
-				data-sap-ui-theme="sap_bluecrystal"></script>
-		<!-- load the mobile lib "sap.m", the layout lib and the "sap_bluecrystal" theme -->
-		
-		
-		<script type="text/javascript">
 
-   // Sales Areas
-    var oAreas = {
-        "North West": ["Manchester", "Liverpool", "Lancaster"],
-        "South East": ["London", "Brighton"],
-        "North East": ["Middlesbrough", "Newcastle", "Hull"]
-    };
-    
-    // Generate some sales figures into a flat array of region/town/amount objects
-    var oSalesFigures = [];
-    oSalesFigures = oSalesFigures.concat.apply(oSalesFigures, Object.keys(oAreas).map(function(region) {
-        return oAreas[region].map(function(town) { 
-            return { "region": region, "town": town, "amount": (Math.random()*1000000+1).toFixed(2) };
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+
+    <title>Mobile App with data-bound List</title>
+
+    <script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-libs="sap.m,sap.ui.layout" data-sap-ui-xx-bindingSyntax="complex" data-sap-ui-theme="sap_bluecrystal"></script>
+    <!-- load the mobile lib "sap.m", the layout lib and the "sap_bluecrystal" theme -->
+
+
+    <script type="text/javascript">
+        // Sales Areas
+        var oAreas = {
+            "North West": ["Manchester", "Liverpool", "Lancaster"],
+            "South East": ["London", "Brighton"],
+            "North East": ["Middlesbrough", "Newcastle", "Hull"]
+        };
+
+        // Generate some sales figures into a flat array of region/town/amount objects
+        var oSalesFigures = [];
+        oSalesFigures = oSalesFigures.concat.apply(oSalesFigures, Object.keys(oAreas).map(function(region) {
+            return oAreas[region].map(function(town) {
+                return {
+                    "region": region,
+                    "town": town,
+                    "amount": (Math.random() * 1000000 + 1).toFixed(2)
+                };
+            });
+        }));
+
+        var oModel = new sap.ui.model.json.JSONModel({
+            "sales": oSalesFigures
         });
-    }));
+        sap.ui.getCore().setModel(oModel);
 
-    var oModel = new sap.ui.model.json.JSONModel({ "sales": oSalesFigures });
-    sap.ui.getCore().setModel(oModel);
-    
-    var oTable = new sap.m.Table("salesdata", {
-        inset: true,
-        headerText: "Sales by Area",
-        headerContent: [
-            new sap.m.Button({
-                text: "Sort",
-                press: function() {
-                    var oData = oModel.getData();
-                    oData.sales.sort(function(a, b) {
-                        if (a.region === b.region) return 0;
-                        return a.region > b.region ? 1 : -1;
-                    });
-                    oModel.setData(oData);
-                }
-            }),
-            new sap.m.Button({
-                text: "Mix Up",
-                press: function() {
-                    var oData = oModel.getData();
-                    oData.sales.sort(function() { return Math.random()-0.5; });
-                    oModel.setData(oData);
-                }
-            })
-        ],
-        columns: [
-            new sap.m.Column({
-                header: new sap.m.Label({ text: "Region" }),
-                mergeDuplicates: true
-            }),
-            new sap.m.Column({ header: new sap.m.Label({ text: "Town/City" }) }),
-            new sap.m.Column({
-                header: new sap.m.Label({ text: "Sales (GBP)" }),
-                hAlign: "Right",
-                minScreenWidth: sap.m.ScreenSize.Tablet,
-                demandPopin: true,
-                popinDisplay: "Block"
-            }),
-        ],
-    });
+        var oTable = new sap.m.Table("salesdata", {
+            inset: true,
+            headerText: "Sales by Area",
+            headerContent: [
+                new sap.m.Button({
+                    text: "Sort",
+                    press: function() {
+                        var oData = oModel.getData();
+                        oData.sales.sort(function(a, b) {
+                            if (a.region === b.region) return 0;
+                            return a.region > b.region ? 1 : -1;
+                        });
+                        oModel.setData(oData);
+                    }
+                }),
+                new sap.m.Button({
+                    text: "Mix Up",
+                    press: function() {
+                        var oData = oModel.getData();
+                        oData.sales.sort(function() {
+                            return Math.random() - 0.5;
+                        });
+                        oModel.setData(oData);
+                    }
+                })
+            ],
+            columns: [
+                new sap.m.Column({
+                    header: new sap.m.Label({
+                        text: "Region"
+                    }),
+                    mergeDuplicates: true
+                }),
+                new sap.m.Column({
+                    header: new sap.m.Label({
+                        text: "Town/City"
+                    })
+                }),
+                new sap.m.Column({
+                    header: new sap.m.Label({
+                        text: "Sales (GBP)"
+                    }),
+                    hAlign: "Right",
+                    minScreenWidth: sap.m.ScreenSize.Tablet,
+                    demandPopin: true,
+                    popinDisplay: "Block"
+                }),
+            ],
+        });
 
-    oTable.bindAggregation("items", {
-        path: "/sales",
-        template: new sap.m.ColumnListItem({
-            cells: [
-                    new sap.m.Label({ text: "{region}" }),
-                    new sap.m.Label({ text: "{town}" }),
+        oTable.bindAggregation("items", {
+            path: "/sales",
+            template: new sap.m.ColumnListItem({
+                cells: [
+                    new sap.m.Label({
+                        text: "{region}"
+                    }),
+                    new sap.m.Label({
+                        text: "{town}"
+                    }),
                     new sap.m.Label({
                         text: {
                             path: "amount",
-                            type: new sap.ui.model.type.Float({ minFractionDigits: 2, maxFractionDigits: 2 })
+                            type: new sap.ui.model.type.Float({
+                                minFractionDigits: 2,
+                                maxFractionDigits: 2
+                            })
                         }
                     })
-            ]
-        })
-    });
-    
-    oTable.placeAt("content");          
-          
-		</script>
-		
-	</head>
-	<body id="content" class="sapUiBody">
-	</body>
-</html>
+                ]
+            })
+        });
 
-  
+        oTable.placeAt("content");
+    </script>
+
+</head>
+
+<body id="content" class="sapUiBody">
+</body>
+
+</html>

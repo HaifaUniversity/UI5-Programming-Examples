@@ -1,80 +1,106 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
-<meta name="description" content="table with combobox and buttons using json model" />
-<script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m,sap.ui.core"
-  type='text/javascript'
-></script>
-  <meta charset="utf-8">
-  <title>JS Bin</title>
+    <meta name="description" content="table with combobox and buttons using json model" />
+    <script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m,sap.ui.core" type='text/javascript'></script>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
 </head>
-<body class='sapUiBody' id="content"><script id="jsbin-javascript">
-var myJSON = {Data:[
-  {Name: "Paul",Age: 32,Sex: "Male"},
-  {Name: "Bob",Age: 20,Sex: "Male"},
-  {Name: "Mary",Age: 25, Sex: "Female"}
-]};
 
-var oModel = new sap.ui.model.json.JSONModel(myJSON);
-sap.ui.getCore().setModel(oModel, "MyJSONData");
+<body class='sapUiBody' id="content">
+    <script id="jsbin-javascript">
+        var myJSON = {
+            Data: [{
+                Name: "Paul",
+                Age: 32,
+                Sex: "Male"
+            }, {
+                Name: "Bob",
+                Age: 20,
+                Sex: "Male"
+            }, {
+                Name: "Mary",
+                Age: 25,
+                Sex: "Female"
+            }]
+        };
 
-oColNam = new sap.m.Column({ /*header : new sap.m.Label({text : "Name"})*/});                             
-oColAge = new sap.m.Column({ /*header : new sap.m.Label({text : "Age"})*/});
-oColSex = new sap.m.Column({ /*header : new sap.m.Label({text : "Sex"})*/});
+        var oModel = new sap.ui.model.json.JSONModel(myJSON);
+        sap.ui.getCore().setModel(oModel, "MyJSONData");
 
- oItem = new sap.ui.core.ListItem("items",{text:'{Age}'});
+        oColNam = new sap.m.Column({ /*header : new sap.m.Label({text : "Name"})*/ });
+        oColAge = new sap.m.Column({ /*header : new sap.m.Label({text : "Age"})*/ });
+        oColSex = new sap.m.Column({ /*header : new sap.m.Label({text : "Sex"})*/ });
 
-var oNamTxt = new sap.m.Text({text: "{Name}"});
-var oAgeTxt = new sap.m.ComboBox({items:{path: "/Data",
-                                        template: oItem} 
+        oItem = new sap.ui.core.ListItem("items", {
+            text: '{Age}'
+        });
 
-});
-var oSexTxt = new sap.m.HBox({items:[
-  new sap.m.Button({ icon: sap.ui.core.IconPool.getIconURI("sys-add"), type:sap.m.ButtonType.Accept,
-       press: function(oEvent){
-         console.log(oEvent);
-         myJSON.Data.push({
-        Name: "Pan",
-          Age:"",
-          Sex:""
-         });
-         oTable.bindItems("/Data",oTableItems,null);
-        // oTable.insertItem(oTableItems,1);
-         
-        // oTable.rerender();
-       }}),
-  new sap.m.Button({icon:sap.ui.core.IconPool.getIconURI("sys-cancel"),type:sap.m.ButtonType.Reject,
-         press: function(oEvent){
-           console.log(oEvent);
-         }})
-]});
+        var oNamTxt = new sap.m.Text({
+            text: "{Name}"
+        });
+        var oAgeTxt = new sap.m.ComboBox({
+            items: {
+                path: "/Data",
+                template: oItem
+            }
 
+        });
+        var oSexTxt = new sap.m.HBox({
+            items: [
+                new sap.m.Button({
+                    icon: sap.ui.core.IconPool.getIconURI("sys-add"),
+                    type: sap.m.ButtonType.Accept,
+                    press: function(oEvent) {
+                        console.log(oEvent);
+                        myJSON.Data.push({
+                            Name: "Pan",
+                            Age: "",
+                            Sex: ""
+                        });
+                        oTable.bindItems("/Data", oTableItems, null);
+                        // oTable.insertItem(oTableItems,1);
 
-var oTableItems = new sap.m.ColumnListItem({vAlign:"Middle",cells:[oNamTxt,oAgeTxt,oSexTxt]});
-
-var oTable = new sap.m.Table({id:"table",
-                                  fixedLayout: false,
-								  type: sap.m.ListType.Active,
-								  mode: sap.m.ListMode.SingleSelectMaster,
-								  includeItemInSelection:true ,
-                  				  });
-
-
-oTable.addColumn(oColNam);
-oTable.addColumn(oColAge);
-oTable.addColumn(oColSex);
-
-//oFilter = new sap.ui.model.Filter('Name',sap.ui.model.FilterOperator.EQ,'Paul');
-oTable.bindAggregation("items","/Data",oTableItems,null);//,oFilter);
-oTable.setModel(oModel);
-
-oTable.placeAt('content');
+                        // oTable.rerender();
+                    }
+                }),
+                new sap.m.Button({
+                    icon: sap.ui.core.IconPool.getIconURI("sys-cancel"),
+                    type: sap.m.ButtonType.Reject,
+                    press: function(oEvent) {
+                        console.log(oEvent);
+                    }
+                })
+            ]
+        });
 
 
+        var oTableItems = new sap.m.ColumnListItem({
+            vAlign: "Middle",
+            cells: [oNamTxt, oAgeTxt, oSexTxt]
+        });
+
+        var oTable = new sap.m.Table({
+            id: "table",
+            fixedLayout: false,
+            type: sap.m.ListType.Active,
+            mode: sap.m.ListMode.SingleSelectMaster,
+            includeItemInSelection: true,
+        });
 
 
+        oTable.addColumn(oColNam);
+        oTable.addColumn(oColAge);
+        oTable.addColumn(oColSex);
 
-</script>
+        //oFilter = new sap.ui.model.Filter('Name',sap.ui.model.FilterOperator.EQ,'Paul');
+        oTable.bindAggregation("items", "/Data", oTableItems, null); //,oFilter);
+        oTable.setModel(oModel);
+
+        oTable.placeAt('content');
+    </script>
 </body>
+
 </html>

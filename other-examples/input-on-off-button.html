@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <meta name="robots" content="noindex">
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>JS Bin</title>
-    <script 
-            src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
-            id="sap-ui-bootstrap" 
-            data-sap-ui-theme="sap_bluecrystal" 
-            data-sap-ui-xx-bindingSyntax="complex" 
-            data-sap-ui-libs="sap.m"></script>
-  </head>
-  <body class="sapUiBody">
+    <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-xx-bindingSyntax="complex" data-sap-ui-libs="sap.m"></script>
+</head>
+
+<body class="sapUiBody">
     <div id='content'></div>
-  <script id="jsbin-javascript">
-var btn = new sap.m.Button({
-  text: {
-    path: '/edit',
-    formatter: function(e) {
-      return e ? 'Edit On' : 'Edit Off';
-    }
-  },
-  press: function() {
-    btn.getModel().setProperty('/edit', !btn.getModel().getProperty('/edit'));
-  }
-});
-  
-
-var oModel = new sap.ui.model.json.JSONModel({
-  edit: false
-});
-
-(new sap.m.VBox({
-  items: [
-    btn,
-    new sap.m.Input("name", {
-      editable: '{/edit}'
-    }),
-    new sap.m.Input("email", {
-      editable: '{/edit}'
-    })   
-  ]
-})).placeAt('content').setModel(oModel);
+    <script id="jsbin-javascript">
+        var btn = new sap.m.Button({
+            text: {
+                path: '/edit',
+                formatter: function(e) {
+                    return e ? 'Edit On' : 'Edit Off';
+                }
+            },
+            press: function() {
+                btn.getModel().setProperty('/edit', !btn.getModel().getProperty('/edit'));
+            }
+        });
 
 
-</script>
+        var oModel = new sap.ui.model.json.JSONModel({
+            edit: false
+        });
+
+        (new sap.m.VBox({
+            items: [
+                btn,
+                new sap.m.Input("name", {
+                    editable: '{/edit}'
+                }),
+                new sap.m.Input("email", {
+                    editable: '{/edit}'
+                })
+            ]
+        })).placeAt('content').setModel(oModel);
+    </script>
 </body>
+
 </html>

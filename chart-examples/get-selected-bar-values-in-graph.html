@@ -1,461 +1,454 @@
 <!DOCTYPE HTML>
 <meta name="robots" content="noindex">
 <html>
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta charset="UTF-8">
-        <title>Column Chart</title>
-        <script id="sap-ui-bootstrap" 
-                type="text/javascript"
-                src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
-                data-sap-ui-theme="sap_bluecrystal"
-                data-sap-ui-libs="sap.m"
-                data-sap-ui-xx-bindingSyntax="complex"
-        >
-        </script>
 
-		
-        <!-- XML-based view definition -->
-        <script id="chartView" type="sapui5/xmlview">
-<mvc:View height="100%" width="100%"
-  controllerName="sap.viz.sample.Column.Column"
-  xmlns:viz="sap.viz.ui5.controls" 
-  xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-    <ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" focusable="true">
-       <viz:Popover id="idPopOver"></viz:Popover>
-       <viz:VizFrame id="idVizFrameColumn" uiConfig="{applicationSet:'fiori'}" vizType="column" selectData="onSelect" width="100%" height="700px">
-       </viz:VizFrame>
-    </ScrollContainer>
-</mvc:View>
-        </script>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">
+    <title>Column Chart</title>
+    <script id="sap-ui-bootstrap" type="text/javascript" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m" data-sap-ui-xx-bindingSyntax="complex">
+    </script>
 
-        <script>
-            // Controller definition
-sap.ui.controller("sap.viz.sample.Column.Column", {
-    onInit: function(oEvent) {
-        var oVizFrame = this.getView().byId("idVizFrameColumn");
-        var oPopOver = this.getView().byId("idPopOver");
-		var aData = [{
-        "Year": 2001,
-        "City": "New York ",
-        "Profit": 249.08,
-        "Unit Price": 1117.60,
-        "Units Available": 13076,
-        "Cost": 139033.42,
-        "Revenue": 207685.42,
-        "Units Sold": 4437
-    }, {
-        "Year": 2001,
-        "City": "San Francisco ",
-        "Profit": 191.82,
-        "Unit Price": 175.78,
-        "Units Available": 2049,
-        "Cost": 17599.08,
-        "Revenue": 22288.10,
-        "Units Sold": 792
-    }, {
-        "Year": 2001,
-        "City": "Washington",
-        "Profit": 115.50,
-        "Unit Price": 1708.42,
-        "Units Available": 20130,
-        "Cost": 355556.57,
-        "Revenue": 496078.98,
-        "Units Sold": 7319
-    }, {
-        "Year": 2002,
-        "City": "New York ",
-        "Profit": 300.47,
-        "Unit Price": 689.18,
-        "Units Available": 16055,
-        "Cost": 142220.73,
-        "Revenue": 201045.22,
-        "Units Sold": 5255
-    }, {
-        "Year": 2002,
-        "City": "San Francisco ",
-        "Profit": 662.40,
-        "Unit Price": 760.11,
-        "Units Available": 8683,
-        "Cost": 112204.81,
-        "Revenue": 157825.91,
-        "Units Sold": 3231
-    }, {
-        "Year": 2002,
-        "City": "Washington",
-        "Profit": -60.08,
-        "Unit Price": 1025.80,
-        "Units Available": 16010,
-        "Cost": 174458.99,
-        "Revenue": 294029.84,
-        "Units Sold": 4121
-    }, {
-        "Year": 2003,
-        "City": "New York ",
-        "Profit": 38.40,
-        "Unit Price": 811.06,
-        "Units Available": 12560,
-        "Cost": 95397.98,
-        "Revenue": 138848.39,
-        "Units Sold": 3490
-    }, {
-        "Year": 2003,
-        "City": "San Francisco ",
-        "Profit": 150.00,
-        "Unit Price": 780.17,
-        "Units Available": 7767,
-        "Cost": 107074.12,
-        "Revenue": 162087.28,
-        "Units Sold": 2619
-    }, {
-        "Year": 2003,
-        "City": "Washington",
-        "Profit": 382.50,
-        "Unit Price": 1197.07,
-        "Units Available": 18508,
-        "Cost": 210012.08,
-        "Revenue": 338402.77,
-        "Units Sold": 6085
-    }, {
-        "Year": 2004,
-        "City": "New York ",
-        "Profit": 127.92,
-        "Unit Price": 1321.31,
-        "Units Available": 17606,
-        "Cost": 233135.97,
-        "Revenue": 356744.07,
-        "Units Sold": 5056
-    }, {
-        "Year": 2004,
-        "City": "San Francisco ",
-        "Profit": 279.83,
-        "Unit Price": 494.09,
-        "Units Available": 7195,
-        "Cost": 75276.58,
-        "Revenue": 102209.05,
-        "Units Sold": 2615
-    }, {
-        "Year": 2004,
-        "City": "Washington",
-        "Profit": 150.48,
-        "Unit Price": 1212.40,
-        "Units Available": 14308,
-        "Cost": 150283.71,
-        "Revenue": 225915.85,
-        "Units Sold": 4913
-    }, {
-        "Year": 2005,
-        "City": "New York ",
-        "Profit": 261.52,
-        "Unit Price": 1252.65,
-        "Units Available": 20463,
-        "Cost": 200832.24,
-        "Revenue": 317599.74,
-        "Units Sold": 5258
-    }, {
-        "Year": 2005,
-        "City": "San Francisco ",
-        "Profit": 292.86,
-        "Unit Price": 874.30,
-        "Units Available": 9145,
-        "Cost": 201545.53,
-        "Revenue": 279871.19,
-        "Units Sold": 2913
-    }, {
-        "Year": 2005,
-        "City": "Washington",
-        "Profit": 90.67,
-        "Unit Price": 1109.54,
-        "Units Available": 19199,
-        "Cost": 181711.95,
-        "Revenue": 253773.15,
-        "Units Sold": 5472
-    }, {
-        "Year": 2006,
-        "City": "New York ",
-        "Profit": 152.53,
-        "Unit Price": 1003.73,
-        "Units Available": 16216,
-        "Cost": 153707.82,
-        "Revenue": 230401.86,
-        "Units Sold": 4296
-    }, {
-        "Year": 2006,
-        "City": "San Francisco ",
-        "Profit": 98.00,
-        "Unit Price": 736.21,
-        "Units Available": 10709,
-        "Cost": 135572.56,
-        "Revenue": 220357.21,
-        "Units Sold": 4676
-    }, {
-        "Year": 2006,
-        "City": "Washington",
-        "Profit": 425.60,
-        "Unit Price": 1255.73,
-        "Units Available": 15082,
-        "Cost": 168278.78,
-        "Revenue": 250021.96,
-        "Units Sold": 4591
-    }, {
-        "Year": 2007,
-        "City": "New York ",
-        "Profit": 228.76,
-        "Unit Price": 1601.95,
-        "Units Available": 19159,
-        "Cost": 284741.72,
-        "Revenue": 422885.25,
-        "Units Sold": 6909
-    }, {
-        "Year": 2007,
-        "City": "San Francisco ",
-        "Profit": 568.10,
-        "Unit Price": 390.28,
-        "Units Available": 6449,
-        "Cost": 90766.25,
-        "Revenue": 132546.89,
-        "Units Sold": 2332
-    }, {
-        "Year": 2007,
-        "City": "Washington",
-        "Profit": 34.80,
-        "Unit Price": 1212.42,
-        "Units Available": 19436,
-        "Cost": 228621.22,
-        "Revenue": 333220.54,
-        "Units Sold": 6895
-    }, {
-        "Year": 2008,
-        "City": "New York ",
-        "Profit": 48.83,
-        "Unit Price": 1907.51,
-        "Units Available": 21139,
-        "Cost": 271978.15,
-        "Revenue": 434799.50,
-        "Units Sold": 5987
-    }, {
-        "Year": 2008,
-        "City": "San Francisco ",
-        "Profit": 595.60,
-        "Unit Price": 523.80,
-        "Units Available": 6713,
-        "Cost": 48279.52,
-        "Revenue": 71455.19,
-        "Units Sold": 1679
-    }, {
-        "Year": 2008,
-        "City": "Washington",
-        "Profit": 364.00,
-        "Unit Price": 999.98,
-        "Units Available": 17545,
-        "Cost": 163781.92,
-        "Revenue": 233020.99,
-        "Units Sold": 6107
-    }, {
-        "Year": 2009,
-        "City": "New York ",
-        "Profit": 86.40,
-        "Unit Price": 1075.12,
-        "Units Available": 17443,
-        "Cost": 166410.85,
-        "Revenue": 255888.30,
-        "Units Sold": 6043
-    }, {
-        "Year": 2009,
-        "City": "San Francisco ",
-        "Profit": 173.23,
-        "Unit Price": 443.15,
-        "Units Available": 9595,
-        "Cost": 43673.49,
-        "Revenue": 69971.47,
-        "Units Sold": 2573
-    }, {
-        "Year": 2009,
-        "City": "Washington",
-        "Profit": 400.86,
-        "Unit Price": 1454.05,
-        "Units Available": 19467,
-        "Cost": 324948.71,
-        "Revenue": 479618.46,
-        "Units Sold": 7441
-    }, {
-        "Year": 2010,
-        "City": "New York ",
-        "Profit": 53.90,
-        "Unit Price": 1349.72,
-        "Units Available": 17481,
-        "Cost": 230416.16,
-        "Revenue": 337221.37,
-        "Units Sold": 5729
-    }, {
-        "Year": 2010,
-        "City": "San Francisco ",
-        "Profit": 265.37,
-        "Unit Price": 1058.53,
-        "Units Available": 15066,
-        "Cost": 211749.53,
-        "Revenue": 343492.75,
-        "Units Sold": 4319
-    }, {
-        "Year": 2010,
-        "City": "Washington",
-        "Profit": 121.33,
-        "Unit Price": 2705.07,
-        "Units Available": 23641,
-        "Cost": 486049.30,
-        "Revenue": 712566.90,
-        "Units Sold": 6836
-    }, {
-        "Year": 2011,
-        "City": "New York ",
-        "Profit": 134.17,
-        "Unit Price": 1193.04,
-        "Units Available": 12529,
-        "Cost": 230564.91,
-        "Revenue": 354005.79,
-        "Units Sold": 5030
-    }, {
-        "Year": 2011,
-        "City": "San Francisco ",
-        "Profit": 273.00,
-        "Unit Price": 741.50,
-        "Units Available": 7885,
-        "Cost": 130562.76,
-        "Revenue": 190768.23,
-        "Units Sold": 2698
-    }, {
-        "Year": 2011,
-        "City": "Washington",
-        "Profit": 49.92,
-        "Unit Price": 1476.36,
-        "Units Available": 17204,
-        "Cost": 240219.42,
-        "Revenue": 381388.78,
-        "Units Sold": 6684
-    }, {
-        "Year": 2012,
-        "City": "New York ",
-        "Profit": 360.00,
-        "Unit Price": 1810.02,
-        "Units Available": 17699,
-        "Cost": 360793.82,
-        "Revenue": 560677.93,
-        "Units Sold": 7092
-    }, {
-        "Year": 2012,
-        "City": "San Francisco ",
-        "Profit": 187.92,
-        "Unit Price": 1019.55,
-        "Units Available": 11165,
-        "Cost": 107771.90,
-        "Revenue": 166641.95,
-        "Units Sold": 2730
-    }, {
-        "Year": 2012,
-        "City": "Washington",
-        "Profit": 138.00,
-        "Unit Price": 1432.99,
-        "Units Available": 17887,
-        "Cost": 250259.29,
-        "Revenue": 372120.33,
-        "Units Sold": 6680
-    }];
-  	var model = new sap.ui.model.json.JSONModel();
-		model.setData({
-			modelData: {
-			booksData : []
-			}
-			});
-		sap.ui.getCore().setModel(model);
-		sap.ui.getCore().getModel().setProperty("/modelData/booksData", aData)
-        var oDataset = new sap.viz.ui5.data.FlattenedDataset({
-            dimensions: [{
-                name: "Year",
-                value: "{Year}"
-            }, {
-                name: 'City',
-                value: '{City}'
-            }],
-            measures: [{
-                name: 'Profit',
-                value: '{Profit}'
-            }],
-            data: {
-                path: "/modelData/booksData"
+
+    <!-- XML-based view definition -->
+    <script id="chartView" type="sapui5/xmlview">
+        <mvc:View height="100%" width="100%" controllerName="sap.viz.sample.Column.Column" xmlns:viz="sap.viz.ui5.controls" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+            <ScrollContainer height="100%" width="100%" horizontal="false" vertical="true" focusable="true">
+                <viz:Popover id="idPopOver"></viz:Popover>
+                <viz:VizFrame id="idVizFrameColumn" uiConfig="{applicationSet:'fiori'}" vizType="column" selectData="onSelect" width="100%" height="700px">
+                </viz:VizFrame>
+            </ScrollContainer>
+        </mvc:View>
+    </script>
+
+    <script>
+        // Controller definition
+        sap.ui.controller("sap.viz.sample.Column.Column", {
+            onInit: function(oEvent) {
+                var oVizFrame = this.getView().byId("idVizFrameColumn");
+                var oPopOver = this.getView().byId("idPopOver");
+                var aData = [{
+                    "Year": 2001,
+                    "City": "New York ",
+                    "Profit": 249.08,
+                    "Unit Price": 1117.60,
+                    "Units Available": 13076,
+                    "Cost": 139033.42,
+                    "Revenue": 207685.42,
+                    "Units Sold": 4437
+                }, {
+                    "Year": 2001,
+                    "City": "San Francisco ",
+                    "Profit": 191.82,
+                    "Unit Price": 175.78,
+                    "Units Available": 2049,
+                    "Cost": 17599.08,
+                    "Revenue": 22288.10,
+                    "Units Sold": 792
+                }, {
+                    "Year": 2001,
+                    "City": "Washington",
+                    "Profit": 115.50,
+                    "Unit Price": 1708.42,
+                    "Units Available": 20130,
+                    "Cost": 355556.57,
+                    "Revenue": 496078.98,
+                    "Units Sold": 7319
+                }, {
+                    "Year": 2002,
+                    "City": "New York ",
+                    "Profit": 300.47,
+                    "Unit Price": 689.18,
+                    "Units Available": 16055,
+                    "Cost": 142220.73,
+                    "Revenue": 201045.22,
+                    "Units Sold": 5255
+                }, {
+                    "Year": 2002,
+                    "City": "San Francisco ",
+                    "Profit": 662.40,
+                    "Unit Price": 760.11,
+                    "Units Available": 8683,
+                    "Cost": 112204.81,
+                    "Revenue": 157825.91,
+                    "Units Sold": 3231
+                }, {
+                    "Year": 2002,
+                    "City": "Washington",
+                    "Profit": -60.08,
+                    "Unit Price": 1025.80,
+                    "Units Available": 16010,
+                    "Cost": 174458.99,
+                    "Revenue": 294029.84,
+                    "Units Sold": 4121
+                }, {
+                    "Year": 2003,
+                    "City": "New York ",
+                    "Profit": 38.40,
+                    "Unit Price": 811.06,
+                    "Units Available": 12560,
+                    "Cost": 95397.98,
+                    "Revenue": 138848.39,
+                    "Units Sold": 3490
+                }, {
+                    "Year": 2003,
+                    "City": "San Francisco ",
+                    "Profit": 150.00,
+                    "Unit Price": 780.17,
+                    "Units Available": 7767,
+                    "Cost": 107074.12,
+                    "Revenue": 162087.28,
+                    "Units Sold": 2619
+                }, {
+                    "Year": 2003,
+                    "City": "Washington",
+                    "Profit": 382.50,
+                    "Unit Price": 1197.07,
+                    "Units Available": 18508,
+                    "Cost": 210012.08,
+                    "Revenue": 338402.77,
+                    "Units Sold": 6085
+                }, {
+                    "Year": 2004,
+                    "City": "New York ",
+                    "Profit": 127.92,
+                    "Unit Price": 1321.31,
+                    "Units Available": 17606,
+                    "Cost": 233135.97,
+                    "Revenue": 356744.07,
+                    "Units Sold": 5056
+                }, {
+                    "Year": 2004,
+                    "City": "San Francisco ",
+                    "Profit": 279.83,
+                    "Unit Price": 494.09,
+                    "Units Available": 7195,
+                    "Cost": 75276.58,
+                    "Revenue": 102209.05,
+                    "Units Sold": 2615
+                }, {
+                    "Year": 2004,
+                    "City": "Washington",
+                    "Profit": 150.48,
+                    "Unit Price": 1212.40,
+                    "Units Available": 14308,
+                    "Cost": 150283.71,
+                    "Revenue": 225915.85,
+                    "Units Sold": 4913
+                }, {
+                    "Year": 2005,
+                    "City": "New York ",
+                    "Profit": 261.52,
+                    "Unit Price": 1252.65,
+                    "Units Available": 20463,
+                    "Cost": 200832.24,
+                    "Revenue": 317599.74,
+                    "Units Sold": 5258
+                }, {
+                    "Year": 2005,
+                    "City": "San Francisco ",
+                    "Profit": 292.86,
+                    "Unit Price": 874.30,
+                    "Units Available": 9145,
+                    "Cost": 201545.53,
+                    "Revenue": 279871.19,
+                    "Units Sold": 2913
+                }, {
+                    "Year": 2005,
+                    "City": "Washington",
+                    "Profit": 90.67,
+                    "Unit Price": 1109.54,
+                    "Units Available": 19199,
+                    "Cost": 181711.95,
+                    "Revenue": 253773.15,
+                    "Units Sold": 5472
+                }, {
+                    "Year": 2006,
+                    "City": "New York ",
+                    "Profit": 152.53,
+                    "Unit Price": 1003.73,
+                    "Units Available": 16216,
+                    "Cost": 153707.82,
+                    "Revenue": 230401.86,
+                    "Units Sold": 4296
+                }, {
+                    "Year": 2006,
+                    "City": "San Francisco ",
+                    "Profit": 98.00,
+                    "Unit Price": 736.21,
+                    "Units Available": 10709,
+                    "Cost": 135572.56,
+                    "Revenue": 220357.21,
+                    "Units Sold": 4676
+                }, {
+                    "Year": 2006,
+                    "City": "Washington",
+                    "Profit": 425.60,
+                    "Unit Price": 1255.73,
+                    "Units Available": 15082,
+                    "Cost": 168278.78,
+                    "Revenue": 250021.96,
+                    "Units Sold": 4591
+                }, {
+                    "Year": 2007,
+                    "City": "New York ",
+                    "Profit": 228.76,
+                    "Unit Price": 1601.95,
+                    "Units Available": 19159,
+                    "Cost": 284741.72,
+                    "Revenue": 422885.25,
+                    "Units Sold": 6909
+                }, {
+                    "Year": 2007,
+                    "City": "San Francisco ",
+                    "Profit": 568.10,
+                    "Unit Price": 390.28,
+                    "Units Available": 6449,
+                    "Cost": 90766.25,
+                    "Revenue": 132546.89,
+                    "Units Sold": 2332
+                }, {
+                    "Year": 2007,
+                    "City": "Washington",
+                    "Profit": 34.80,
+                    "Unit Price": 1212.42,
+                    "Units Available": 19436,
+                    "Cost": 228621.22,
+                    "Revenue": 333220.54,
+                    "Units Sold": 6895
+                }, {
+                    "Year": 2008,
+                    "City": "New York ",
+                    "Profit": 48.83,
+                    "Unit Price": 1907.51,
+                    "Units Available": 21139,
+                    "Cost": 271978.15,
+                    "Revenue": 434799.50,
+                    "Units Sold": 5987
+                }, {
+                    "Year": 2008,
+                    "City": "San Francisco ",
+                    "Profit": 595.60,
+                    "Unit Price": 523.80,
+                    "Units Available": 6713,
+                    "Cost": 48279.52,
+                    "Revenue": 71455.19,
+                    "Units Sold": 1679
+                }, {
+                    "Year": 2008,
+                    "City": "Washington",
+                    "Profit": 364.00,
+                    "Unit Price": 999.98,
+                    "Units Available": 17545,
+                    "Cost": 163781.92,
+                    "Revenue": 233020.99,
+                    "Units Sold": 6107
+                }, {
+                    "Year": 2009,
+                    "City": "New York ",
+                    "Profit": 86.40,
+                    "Unit Price": 1075.12,
+                    "Units Available": 17443,
+                    "Cost": 166410.85,
+                    "Revenue": 255888.30,
+                    "Units Sold": 6043
+                }, {
+                    "Year": 2009,
+                    "City": "San Francisco ",
+                    "Profit": 173.23,
+                    "Unit Price": 443.15,
+                    "Units Available": 9595,
+                    "Cost": 43673.49,
+                    "Revenue": 69971.47,
+                    "Units Sold": 2573
+                }, {
+                    "Year": 2009,
+                    "City": "Washington",
+                    "Profit": 400.86,
+                    "Unit Price": 1454.05,
+                    "Units Available": 19467,
+                    "Cost": 324948.71,
+                    "Revenue": 479618.46,
+                    "Units Sold": 7441
+                }, {
+                    "Year": 2010,
+                    "City": "New York ",
+                    "Profit": 53.90,
+                    "Unit Price": 1349.72,
+                    "Units Available": 17481,
+                    "Cost": 230416.16,
+                    "Revenue": 337221.37,
+                    "Units Sold": 5729
+                }, {
+                    "Year": 2010,
+                    "City": "San Francisco ",
+                    "Profit": 265.37,
+                    "Unit Price": 1058.53,
+                    "Units Available": 15066,
+                    "Cost": 211749.53,
+                    "Revenue": 343492.75,
+                    "Units Sold": 4319
+                }, {
+                    "Year": 2010,
+                    "City": "Washington",
+                    "Profit": 121.33,
+                    "Unit Price": 2705.07,
+                    "Units Available": 23641,
+                    "Cost": 486049.30,
+                    "Revenue": 712566.90,
+                    "Units Sold": 6836
+                }, {
+                    "Year": 2011,
+                    "City": "New York ",
+                    "Profit": 134.17,
+                    "Unit Price": 1193.04,
+                    "Units Available": 12529,
+                    "Cost": 230564.91,
+                    "Revenue": 354005.79,
+                    "Units Sold": 5030
+                }, {
+                    "Year": 2011,
+                    "City": "San Francisco ",
+                    "Profit": 273.00,
+                    "Unit Price": 741.50,
+                    "Units Available": 7885,
+                    "Cost": 130562.76,
+                    "Revenue": 190768.23,
+                    "Units Sold": 2698
+                }, {
+                    "Year": 2011,
+                    "City": "Washington",
+                    "Profit": 49.92,
+                    "Unit Price": 1476.36,
+                    "Units Available": 17204,
+                    "Cost": 240219.42,
+                    "Revenue": 381388.78,
+                    "Units Sold": 6684
+                }, {
+                    "Year": 2012,
+                    "City": "New York ",
+                    "Profit": 360.00,
+                    "Unit Price": 1810.02,
+                    "Units Available": 17699,
+                    "Cost": 360793.82,
+                    "Revenue": 560677.93,
+                    "Units Sold": 7092
+                }, {
+                    "Year": 2012,
+                    "City": "San Francisco ",
+                    "Profit": 187.92,
+                    "Unit Price": 1019.55,
+                    "Units Available": 11165,
+                    "Cost": 107771.90,
+                    "Revenue": 166641.95,
+                    "Units Sold": 2730
+                }, {
+                    "Year": 2012,
+                    "City": "Washington",
+                    "Profit": 138.00,
+                    "Unit Price": 1432.99,
+                    "Units Available": 17887,
+                    "Cost": 250259.29,
+                    "Revenue": 372120.33,
+                    "Units Sold": 6680
+                }];
+                var model = new sap.ui.model.json.JSONModel();
+                model.setData({
+                    modelData: {
+                        booksData: []
+                    }
+                });
+                sap.ui.getCore().setModel(model);
+                sap.ui.getCore().getModel().setProperty("/modelData/booksData", aData)
+                var oDataset = new sap.viz.ui5.data.FlattenedDataset({
+                    dimensions: [{
+                        name: "Year",
+                        value: "{Year}"
+                    }, {
+                        name: 'City',
+                        value: '{City}'
+                    }],
+                    measures: [{
+                        name: 'Profit',
+                        value: '{Profit}'
+                    }],
+                    data: {
+                        path: "/modelData/booksData"
+                    }
+                });
+
+                oVizFrame.setDataset(oDataset);
+                oVizFrame.setModel(model);
+
+                var feedValueAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
+                        'uid': "valueAxis",
+                        'type': "Measure",
+                        'values': ["Profit"]
+                    }),
+                    feedCategoryAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
+                        'uid': "categoryAxis",
+                        'type': "Dimension",
+                        'values': ["Year"]
+                    }),
+                    feedColor = new sap.viz.ui5.controls.common.feeds.FeedItem({
+                        'uid': "color",
+                        'type': "Dimension",
+                        'values': ["City"]
+                    });
+
+                oVizFrame.setVizProperties({
+                    plotArea: {
+                        dataLabel: {
+                            visible: true,
+                            formatString: "#,##0"
+                        }
+                    },
+                    legend: {
+                        title: {
+                            visible: false
+                        }
+                    },
+
+                    title: {
+                        visible: true,
+                        text: 'Profit by City and Year'
+                    }
+                });
+
+                oVizFrame.addFeed(feedValueAxis);
+                oVizFrame.addFeed(feedCategoryAxis);
+                oVizFrame.addFeed(feedColor);
+                oPopOver.connect(oVizFrame.getVizUid());
+            },
+
+            onSelect(oEvent) {
+                var oGetData = oEvent.getParameter("data");
+                var oSelectData = oGetData[0].data;
+                var oModel = sap.ui.getCore().getModel().getProperty("/modelData/selectedData");
+                if (!oModel) {
+                    var oModel = [];
+                    oModel.push(oSelectData);
+                } else {
+                    oModel.push(oSelectData);
+                }
+                sap.ui.getCore().getModel().setProperty("/modelData/selectedData", oModel);
+                alert(JSON.stringify(oModel));
             }
         });
 
-        oVizFrame.setDataset(oDataset);
-        oVizFrame.setModel(model);
 
-        var feedValueAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
-                'uid': "valueAxis",
-                'type': "Measure",
-                'values': ["Profit"]
-            }),
-            feedCategoryAxis = new sap.viz.ui5.controls.common.feeds.FeedItem({
-                'uid': "categoryAxis",
-                'type': "Dimension",
-                'values': ["Year"]
-            }),
-            feedColor = new sap.viz.ui5.controls.common.feeds.FeedItem({
-                'uid': "color",
-                'type': "Dimension",
-                'values': ["City"]
-            });
-
-        oVizFrame.setVizProperties({
-            plotArea: {
-                dataLabel: {
-                    visible: true,
-                    formatString: "#,##0"
-                }
-            },
-            legend: {
-                title: {
-                    visible: false
-                }
-            },
-
-            title: {
-                visible: true,
-                text: 'Profit by City and Year'
-            }
+        // Instantiate the View, assign a model
+        // and display
+        var oView = sap.ui.xmlview({
+            viewContent: jQuery('#chartView').html()
         });
 
-        oVizFrame.addFeed(feedValueAxis);
-        oVizFrame.addFeed(feedCategoryAxis);
-        oVizFrame.addFeed(feedColor);
-        oPopOver.connect(oVizFrame.getVizUid());
-    },
-	
-	onSelect(oEvent){
-	 var oGetData = oEvent.getParameter("data");
-	 var oSelectData = oGetData[0].data;
-	 var oModel = sap.ui.getCore().getModel().getProperty("/modelData/selectedData");
-	 if(!oModel){
-	 var oModel = [];
-	 oModel.push(oSelectData);
-	 }
-	 else{
-	 oModel.push(oSelectData);
-	 }
-	 sap.ui.getCore().getModel().setProperty("/modelData/selectedData", oModel);
-	 alert(JSON.stringify(oModel));
-	}
-});
+        oView.placeAt('content');
+    </script>
+</head>
 
-            
-            // Instantiate the View, assign a model
-            // and display
-            var oView = sap.ui.xmlview({
-                viewContent: jQuery('#chartView').html()
-            });
-            
-            oView.placeAt('content');
-        </script>
-    </head>
-    <body class="sapUiBody" role="application">
-        <div id="content"></div>
-    </body>
+<body class="sapUiBody" role="application">
+    <div id="content"></div>
+</body>
+
 </html>

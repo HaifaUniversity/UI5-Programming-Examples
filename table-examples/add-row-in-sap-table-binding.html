@@ -1,67 +1,70 @@
 <!DOCTYPE HTML>
 <meta name="robots" content="noindex">
 <html>
+
 <head>
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<title>Table  - Add data in JSON</title>
-<link rel="shortcut icon" type="image/x-icon" href="images/controls/sap.ui.table.Table.gif">
-<script id="sap-ui-bootstrap" 
-	type="text/javascript"
-	data-sap-ui-libs="sap.m"
-	data-sap-ui-theme="sap_goldreflection"
-	src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"></script>
+    <title>Table - Add data in JSON</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/controls/sap.ui.table.Table.gif">
+    <script id="sap-ui-bootstrap" type="text/javascript" data-sap-ui-libs="sap.m" data-sap-ui-theme="sap_goldreflection" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"></script>
 
-  <script type="text/javascript">
-    
-    function bindModel(tbl) {
-      tbl.bindItems("/", new sap.m.ColumnListItem({
-        cells : [ new sap.m.Text({
-          text : "{lastName}"
-        }), new sap.m.Text({
-          text : "{firstName}"
-        })]
-      }));
-    }
+    <script type="text/javascript">
+        function bindModel(tbl) {
+            tbl.bindItems("/", new sap.m.ColumnListItem({
+                cells: [new sap.m.Text({
+                    text: "{lastName}"
+                }), new sap.m.Text({
+                    text: "{firstName}"
+                })]
+            }));
+        }
 
-	var oTable = new sap.m.Table({
-      columns: [
-        new sap.m.Column({
-            width : "1em",
-            header : new sap.m.Label({
-                text : "Last Name"
-            })
-        }),
-        new sap.m.Column({
-            width : "1em",
-            header : new sap.m.Label({
-                text : "First Name"
-            })
-        })
-      ]
-    });
+        var oTable = new sap.m.Table({
+            columns: [
+                new sap.m.Column({
+                    width: "1em",
+                    header: new sap.m.Label({
+                        text: "Last Name"
+                    })
+                }),
+                new sap.m.Column({
+                    width: "1em",
+                    header: new sap.m.Label({
+                        text: "First Name"
+                    })
+                })
+            ]
+        });
 
-    var oModel = new sap.ui.model.json.JSONModel();
-    var users = [];
-    for (var i = 0; i < 10; i++) {
-      users.push({lastName: 'lastName' + i,  firstName: 'firstName' + i});
-    }
-    oModel.setData(users);
-    
-	oTable.setModel(oModel);
-	oTable.placeAt("content");
-    bindModel(oTable);
+        var oModel = new sap.ui.model.json.JSONModel();
+        var users = [];
+        for (var i = 0; i < 10; i++) {
+            users.push({
+                lastName: 'lastName' + i,
+                firstName: 'firstName' + i
+            });
+        }
+        oModel.setData(users);
 
-    setTimeout(function() {
-      oTable.getModel().getData().push({lastName: 'John',  firstName: 'Doe'});
-      bindModel(oTable);
-    }, 1000);
-    
-</script>
+        oTable.setModel(oModel);
+        oTable.placeAt("content");
+        bindModel(oTable);
+
+        setTimeout(function() {
+            oTable.getModel().getData().push({
+                lastName: 'John',
+                firstName: 'Doe'
+            });
+            bindModel(oTable);
+        }, 1000);
+    </script>
 </head>
+
 <body class="sapUiBody" role="application">
-  <h2>Add row in sap.m.table</h2>
-  <div id="content"></div>
+    <h2>Add row in sap.m.table</h2>
+    <div id="content"></div>
 </body>
+
 </html>
