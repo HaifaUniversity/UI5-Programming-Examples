@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by fribe (http://jsbin.com/vudoxi/5/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html><head>
+    <meta name="description" content="UI5 XML view example" />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+	
+	<title>UI5 Table MultiSelect with XmlView</title>
+	
+	<!-- Load UI5, select gold reflection theme and the "commons" control library -->
+	<script id='sap-ui-bootstrap' type='text/javascript'
+		src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'
+		data-sap-ui-theme='sap_bluecrystal'
+		data-sap-ui-libs='sap.ui.commons'
+	    data-sap-ui-libs="sap.m"
+		data-sap-ui-xx-bindingSyntax="complex"
+		>
+		</script>
+	
+	<script>
+		
+		// define a new (simple) Controller type
+		sap.ui.controller("my.own.controller", {
+			
+			// implement an event handler in the Controller
+			onInit: function() {
+		
+	var demoData = 
+        {
+          "ProductCollection": [
+			{
+				"ProductId": "1239102",
+				"Name": "Power Projector 4713",
+				"Category": "Projector",
+				"SupplierName": "Titanium",
+				"Description": "A very powerful projector with special features for Internet usability, USB",
+				"WeightMeasure": 1467,
+				"WeightUnit": "g",
+				"Price": "856.49",
+				"CurrencyCode": "EUR",
+				"Status": "Available",
+				"Quantity": "3",
+				"UoM": "PC",
+				"Width": "51",
+				"Depth": "42",
+				"Height": "18",
+				"DimUnit": "cm",
+				"ProductPicUrl": "https://openui5.hana.ondemand.com/test-resources/sap/ui/demokit/explored/img/large_HT-6100.jpg"
+			},
+			{
+				"ProductId": "OP-38800002",
+				"Name": "High End Laptop 2b",
+				"Category": "Laptop",
+				"SupplierName": "Titanium",
+				"Description": "Notebook Professional 17 with 2,3GHz - 17 inches XGA - 2048MB DDR2 SDRAM - 40GB Hard Disc - DVD-Writer (DVD-R/+R/-RW/-RAM)",
+				"WeightMeasure": 1190,
+				"WeightUnit": "g",
+				"Price": "939",
+				"CurrencyCode": "EUR",
+				"Status": "Out of Stock",
+				"Quantity": "18",
+				"UoM": "PC",
+				"Width": "64",
+				"Depth": "34",
+				"Height": "4",
+				"DimUnit": "cm",
+				"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1010.jpg"
+			},
+            {
+			"ProductId": "K47322.1",
+			"Name": "Hurricane GX",
+			"Category": "Graphics Card",
+			"SupplierName": "Red Point Stores",
+			"Description": "Hurricane GX: DDR2 RoHS 512MB Supporting 1024MB Clock rate: 550 MHz Memory Clock: 933 MHz, Bus Type: PCI-Express, Memory Type: DDR2 Memory Bus: 64-bit Highlighted Features: DVI Out, TV-In, TV-Out, HDTV",
+			"WeightMeasure": 588,
+			"WeightUnit": "g",
+			"Price": 219,
+			"CurrencyCode": "EUR",
+			"Status": "Out of Stock",
+			"Quantity": 25,
+			"UoM": "PC",
+			"Width": 34,
+			"Depth": 14,
+			"Height": 2,
+			"DimUnit": "cm",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1072.jpg"
+		},
+		{
+			"ProductId": "22134T",
+			"Name": "Webcam",
+			"Category": "Accessory",
+			"SupplierName": "Technocom",
+			"Description": "Web camera, color, High-Speed USB",
+			"WeightMeasure": 700,
+			"WeightUnit": "g",
+			"Price": 59,
+			"CurrencyCode": "EUR",
+			"Status": "Available",
+			"Quantity": 22,
+			"UoM": "PC",
+			"Width": 18,
+			"Depth": 19,
+			"Height": 21,
+			"DimUnit": "cm",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1112.jpg"
+		},
+           ]
+        };
+        var oModel = new sap.ui.model.json.JSONModel();
+        oModel.setData( demoData );
+//        sap.ui.getCore().setModel(oModel);
+        this.getView().setModel( oModel ) ;		              
+			},
+          
+        deleteItemPressed : function(evt) {
+						var oModel = this.getView().getModel();
+						var data = oModel.getData();
+						var oTable = this.byId("pruductsTable");
+
+						var sItems = oTable.getSelectedItems();
+						
+						if (sItems.length == 0) {
+							alert("Please Select a row to Delete");
+							return;
+						} else {
+									
+            	      for ( var i = sItems.length - 1; i >= 0; i--) {
+									path = sItems[i].getBindingContext().getPath();
+									var idx = parseInt(path.substring(path.lastIndexOf('/') + 1));								
+									data.lineitems.splice(idx, 1);							
+								}
+							oModel.setData(data);
+							}
+							oTable.removeSelections();
+					},  
+		});
+      
+
+		var xml = '<mvc:View controllerName="my.own.controller"	xmlns:l="sap.ui.layout"	xmlns:mvc="sap.ui.core.mvc"	xmlns="sap.m">'
+	    +'<Table id="productsTable" mode="MultiSelect" inset="false"		items="{/ProductCollection}">'
+		+'<headerToolbar>'
+		+'	<Toolbar>'
+		+'		<Label text="Products"></Label>'
+        +'      <Button text="Delete Item" press="deleteItemPressed" />'
+		+'	</Toolbar>'
+		+'</headerToolbar>'
+		+'<columns>'
+		+'	<Column>'
+		+'		<Text text="Product" />'
+		+'	</Column>'
+		+'	<Column'
+		+'		hAlign="Center"'
+		+'		width="12em"'
+		+'		minScreenWidth="Tablet"'
+		+'		demandPopin="true">'
+		+'		<Text text="Quantity" />'
+		+'	</Column>'
+		+'	<Column'
+		+'		minScreenWidth="Tablet"'
+		+'		demandPopin="true"'
+		+'		hAlign="Center">'
+		+'		<Text text="Weight" />'
+		+'	</Column>'
+		+'	<Column'
+		+'		hAlign="Right">'
+		+'		<Text text="Unit Price" />'
+		+'	</Column>'
+		+'</columns>'
+		+'<items>'
+		+'	<ColumnListItem vAlign="Middle" >'
+		+'		<cells>'
+		+'			<ObjectIdentifier'
+		+'				title="{Name}"'
+		+'				text="{ProductId}"'
+		+'				class="sapMTableContentMargin" />'
+		+'			'
+		+'			<Input value="{Quantity}" type="{Text}" description="{UoM}" fieldWidth="60%"/>'
+        +'			<ObjectNumber'
+		+'				number="{WeightMeasure}"'
+		+'				unit="{WeightUnit}"'
+		+'		     />						'				
+		+'			<ObjectNumber'
+		+'				number="{Price}"'
+		+'				unit="{CurrencyCode}" />'
+		+'		</cells>'
+		+'	</ColumnListItem>'
+		+'</items>'
+	    +'</Table>'
+        +'</mvc:View>        ';      
+      
+      	/*** THIS IS THE "APPLICATION" CODE ***/
+		
+		
+		// instantiate the View
+		var myView = sap.ui.xmlview({viewContent:xml});
+		
+		
+		// put the View onto the screen
+		myView.placeAt('content');
+      
+  </script>
+</head>
+<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/wanopave/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html><head>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+	
+	<title>OData Date Formats</title>
+	
+    <script id='sap-ui-bootstrap' type='text/javascript' 
+        src='https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js'
+          data-sap-ui-theme='sap_bluecrystal'
+       data-sap-ui-xx-fakeOS="ipad"
+        data-sap-ui-libs='sap.ui.commons,sap.ui.ux3,sap.ui.table,sap.m'>
+  
+    </script> 
+	
+	
+	<script>
+  var layout = new sap.ui.commons.layout.MatrixLayout('layout');
+layout.setWidth('100%');
+ 
+ 
+var loginPannel = new sap.ui.commons.Panel('loginPannel');
+var sTitle = new sap.ui.commons.Title('sTitle');
+sTitle.setText('Login Page');
+loginPannel.setTitle(sTitle);
+ 
+ 
+              var sLayout = new sap.ui.commons.layout.MatrixLayout('sLayout');
+sLayout.setWidth('50%');
+ 
+                var label = new sap.ui.commons.Label( { text : "First Name" } );
+          var text = new sap.ui.commons.TextField("firstname",{  }) ;
+        
+          var label1 = new sap.ui.commons.Label({ text : "Last Name" });
+          var text1 = new sap.ui.commons.TextField("lastname",{ }) ;
+        
+          var label2 = new sap.ui.commons.Label( { text : "Age" } );
+          var text2 = new sap.ui.commons.TextField("age",{  }) ;
+        
+          var label3 = new sap.ui.commons.Label( { text : "Address" } );
+          var text3 = new sap.ui.commons.TextField("address",{  }) ;
+      
+          var EmployeesCounter = 3;
+          var oButton = new sap.ui.commons.Button({text:"Add",
+press:function(){
+var fname = sap.ui.getCore().byId('firstname').getValue();
+var lname = sap.ui.getCore().byId('lastname').getValue();
+var age = sap.ui.getCore().byId('age').getValue();
+var address = sap.ui.getCore().byId('address').getValue();
+ 
+mdData.Employees.push({"firstName":fname,"lastName":lname,"age":age,"address":address,"id":EmployeesCounter++});
+oModel.setData(mdData);
+alert("Data added successfully");
+}
+ 
+});
+      
+      
+      var oDElButton = new sap.ui.commons.Button({text:"Delete",
+press:function(){
+ 
+mdData.Employees.splice(0,1);
+oModel.setData(mdData);
+alert("Data deleted successfully");
+}
+ 
+});
+    
+          sLayout.createRow(label, text);
+          sLayout.createRow(label1, text1);
+          sLayout.createRow(label2, text2);
+          sLayout.createRow(label3, text3);
+          sLayout.createRow(oButton);
+        sLayout.createRow(oDElButton);
+        
+          loginPannel.addContent(sLayout);
+        
+          layout.createRow(loginPannel);
+          layout.placeAt('content');
+          
+ 
+              var mdData = {
+                          Employees:[
+                                    {firstName:"Pal", lastName:"saran",age:"25",address:"Salem", id: "1"},
+                                    {firstName:"Mahesh", lastName:"babu", age:"28",address:"Hosur",id: "2"},
+ 
+                                ]
+                  
+              };
+              var oModel = new sap.ui.model.json.JSONModel();
+              oModel.setData(mdData);
+              sap.ui.getCore().setModel(oModel);
+ 
+            
+              var oTable = new sap.ui.table.DataTable({
+                    title : "Employees",
+                    width : "100%",
+                    visibleRowCount : 5,
+                  selectionMode : sap.ui.table.SelectionMode.None,
+                    editable : false
+              });
+ 
+              oTable.addColumn(new sap.ui.table.ColumnHeader({
+                    label: new sap.ui.commons.Label({text: "S.No"}),
+                    template: new sap.ui.commons.Label({text:"{id}"})
+              }));
+              oTable.addColumn(new sap.ui.table.ColumnHeader({
+                    label: new sap.ui.commons.Label({text: "First Name"}),
+                    template: new sap.ui.commons.TextField({value:"{firstName}"})
+              }));
+              oTable.addColumn(new sap.ui.table.ColumnHeader({
+                    label: new sap.ui.commons.Label({text: "Last Name"}),
+                    template: new sap.ui.commons.TextField({value:"{lastName}"})
+              }));
+ 
+              oTable.addColumn(new sap.ui.table.ColumnHeader({
+                    label: new sap.ui.commons.Label({text: "Age"}),
+                    template: new sap.ui.commons.TextField({value:"{age}"})
+              }));
+            
+              oTable.addColumn(new sap.ui.table.ColumnHeader({
+                    label: new sap.ui.commons.Label({text: "Address"}),
+                    template: new sap.ui.commons.TextField({value:"{address}"})
+              }));
+            
+              oTable.bindRows("/Employees");
+              oTable.placeAt("content");     
+      
+      
+ 	</script>
+	</head>
+	<body class='sapUiBody'>
+		<div id='content'></div>
+	</body>
+</html>

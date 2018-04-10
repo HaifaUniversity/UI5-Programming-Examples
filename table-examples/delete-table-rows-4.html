@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by dennisseah (http://jsbin.com/yewula/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" id="sap-ui-bootstrap"     
+  data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.ui.commons,sap.ui.table,sap.m"></script>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+
+  <script>
+    var $lbl = sap.ui.commons.Label;
+    var $fld = sap.ui.commons.TextField;
+    
+
+   
+    var tbl = new sap.ui.table.Table({tableId: "tblTest",
+        selectionMode: sap.ui.table.SelectionMode.Single ,
+        columns: [
+          new sap.ui.table.Column({
+            label: new $lbl({ text: "Order ID" }), 
+            template: new $fld({value: "{OrderID}"})
+          }),
+          new sap.ui.table.Column({
+            label: new $lbl({text:"Customer ID"}), 
+            template: new $fld({value: "{CustomerID}"})
+          })
+        ]
+    });
+ 
+    var oModel = new sap.ui.model.json.JSONModel();
+    oModel.setData(JSON.parse('[{"OrderID":10248,"CustomerID":"VINET"},{"OrderID":10249,"CustomerID":"TOMSP"},{"OrderID":10250,"CustomerID":"HANAR"},{"OrderID":10251,"CustomerID":"VICTE"},{"OrderID":10252,"CustomerID":"SUPRD"},{"OrderID":10253,"CustomerID":"HANAR"},{"OrderID":10254,"CustomerID":"CHOPS"},{"OrderID":10255,"CustomerID":"RICSU"},{"OrderID":10256,"CustomerID":"WELLI"},{"OrderID":10257,"CustomerID":"HILAA"},{"OrderID":10258,"CustomerID":"ERNSH"},{"OrderID":10259,"CustomerID":"CENTC"},{"OrderID":10260,"CustomerID":"OTTIK"},{"OrderID":10261,"CustomerID":"QUEDE"},{"OrderID":10262,"CustomerID":"RATTC"},{"OrderID":10263,"CustomerID":"ERNSH"},{"OrderID":10264,"CustomerID":"FOLKO"},{"OrderID":10265,"CustomerID":"BLONP"},{"OrderID":10266,"CustomerID":"WARTH"},{"OrderID":10267,"CustomerID":"FRANK"},{"OrderID":10268,"CustomerID":"GROSR"},{"OrderID":10269,"CustomerID":"WHITC"},{"OrderID":10270,"CustomerID":"WARTH"},{"OrderID":10271,"CustomerID":"SPLIR"},{"OrderID":10272,"CustomerID":"RATTC"},{"OrderID":10273,"CustomerID":"QUICK"},{"OrderID":10274,"CustomerID":"VINET"},{"OrderID":10275,"CustomerID":"MAGAA"},{"OrderID":10276,"CustomerID":"TORTU"},{"OrderID":10277,"CustomerID":"MORGK"},{"OrderID":10278,"CustomerID":"BERGS"},{"OrderID":10279,"CustomerID":"LEHMS"},{"OrderID":10280,"CustomerID":"BERGS"},{"OrderID":10281,"CustomerID":"ROMEY"},{"OrderID":10282,"CustomerID":"ROMEY"},{"OrderID":10283,"CustomerID":"LILAS"},{"OrderID":10284,"CustomerID":"LEHMS"},{"OrderID":10285,"CustomerID":"QUICK"},{"OrderID":10286,"CustomerID":"QUICK"},{"OrderID":10287,"CustomerID":"RICAR"},{"OrderID":10288,"CustomerID":"REGGC"},{"OrderID":10289,"CustomerID":"BSBEV"},{"OrderID":10290,"CustomerID":"COMMI"},{"OrderID":10291,"CustomerID":"QUEDE"},{"OrderID":10292,"CustomerID":"TRADH"},{"OrderID":10293,"CustomerID":"TORTU"},{"OrderID":10294,"CustomerID":"RATTC"},{"OrderID":10295,"CustomerID":"VINET"},{"OrderID":10296,"CustomerID":"LILAS"}]'));
+
+
+    tbl.setModel(oModel);    
+    
+    tbl.bindRows("/");
+    tbl.placeAt("content");
+    
+    (new sap.ui.commons.Button({
+      text: 'Delete',
+      press : function() {
+        var idx = tbl.getSelectedIndex();
+        if (idx !== -1) {
+          var m = tbl.getModel();
+          var data = m.getData();
+          var removed = data.splice(idx, 1);
+          m.setData(data)
+          sap.m.MessageToast.show(JSON.stringify(removed[0]) +  'is removed');
+        } else {
+          sap.m.MessageToast.show('Please select a row');
+        }
+      }
+    })).placeAt('content');
+ 
+  </script>
+</head>
+<body class="sapUiBody">
+    <div id="content"></div>
+</body>
+</html>

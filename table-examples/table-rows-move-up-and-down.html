@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/UPokiS/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+  
+    <title>3417229</title>
+
+    <script src="https://sapui5.hana.ondemand.com/sdk/resources/sap-ui-core.js"
+        type="text/javascript"
+        id="sap-ui-bootstrap"
+        data-sap-ui-libs="sap.ui.commons,sap.ui.table"
+        data-sap-ui-theme="sap_goldreflection">
+    </script>
+    
+    <script>
+      
+      sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel({
+        numbers: [{column1: 1000,column2: 100}, {column1: 2000,column2: 200}, {column1: 3000,column2: 300}, {column1: 4000,column2: 400}]
+      }));
+
+      /* var oExoticDecimalTypeForUS = new sap.ui.model.type.Float({
+        groupingEnabled: true,
+        groupingSeparator: "-",
+        minFractionDigits: 2
+      });*/
+		var oTable = new sap.ui.table.Table({
+				        title: "Table",
+				        visibleRowCount: 7,				  
+				        selectionMode: sap.ui.table.SelectionMode.Single
+				});
+      			
+      oTable.addColumn(new sap.ui.table.Column({
+						label: new sap.ui.commons.Label({text: "Column1"}),
+						template: new sap.ui.commons.TextView().bindProperty("text", "column1")					
+					}));
+      oTable.addColumn(new sap.ui.table.Column({
+						label: new sap.ui.commons.Label({text: "Column2"}),
+						template: new sap.ui.commons.TextView().bindProperty("text", "column2")					
+					}));
+      oTable.bindRows("/numbers").placeAt("content");
+      
+      new sap.ui.commons.Button({
+        text: "Move Up",
+        press: function() {
+          var oModel = sap.ui.getCore().getModel();
+          var oData = oModel.getData();
+          var selectedIndex = oTable.getSelectedIndex();
+          if(selectedIndex>=1)
+          {
+             var temp = oData.numbers[selectedIndex-1];
+            oData.numbers[selectedIndex-1] = oData.numbers[selectedIndex];
+            oData.numbers[selectedIndex] = temp;
+            oTable.setSelectedIndex(selectedIndex-1);
+            
+          }
+          oModel.setData(oData);
+          
+        }
+      }).placeAt("content");
+      
+    new sap.ui.commons.Button({
+        text: "Move Down",
+        press: function() {
+          var oModel = sap.ui.getCore().getModel();
+          var oData = oModel.getData();
+          var selectedIndex = oTable.getSelectedIndex();
+          if(selectedIndex<oData.numbers.length-1)
+          {
+             var temp = oData.numbers[selectedIndex+1];
+            oData.numbers[selectedIndex+1] = oData.numbers[selectedIndex];
+            oData.numbers[selectedIndex] = temp;
+            oTable.setSelectedIndex(selectedIndex+1);
+            
+          }
+          oModel.setData(oData);         
+        }
+      }).placeAt("content"); 
+      
+     new sap.ui.commons.Button({
+        text: "Move to Top",
+        press: function() {
+          var oModel = sap.ui.getCore().getModel(); 
+          var oData = oModel.getData();
+          var selectedIndex = oTable.getSelectedIndex();
+          if(selectedIndex>0)
+          {
+             var temp = oData.numbers[0];
+            var temp1 = oData.numbers[selectedIndex];
+            oData.numbers[selectedIndex] = oData.numbers[selectedIndex-1];
+            oData.numbers[0] = temp1;
+            oData.numbers[1] = temp;
+             
+            oTable.setSelectedIndex(0);  
+            
+          }
+          oModel.setData(oData);
+        }
+      }).placeAt("content");
+      
+      new sap.ui.commons.Button({
+        text: "Move to Bottom",
+        press: function() {
+          var oModel = sap.ui.getCore().getModel();
+          var oData = oModel.getData();
+          var selectedIndex = oTable.getSelectedIndex();
+          if(selectedIndex<oData.numbers.length-1)
+          {
+             
+            
+          }
+          oModel.setData(oData);
+        }
+      }).placeAt("content");
+      
+    </script>
+
+  </head>
+  <body class="sapUiBody">
+    <div id="content"></div>
+  </body>
+</html>

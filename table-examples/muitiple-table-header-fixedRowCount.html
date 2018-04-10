@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/qixahidila/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta name="description" content="OpenUI5 BIN Starting template" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8">
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
+          id="sap-ui-bootstrap" 
+          data-sap-ui-theme="sap_bluecrystal" 
+          data-sap-ui-libs="sap.ui.commons,sap.ui.table,sap.ui.ux3,sap.m"></script>
+</head>
+
+<body class="sapUiBody">
+  <div id="content"></div> 
+<script id="jsbin-javascript">
+
+
+ // TABLE TEST DATA
+	var aData = [
+   		{lastName: "Dente", name: "Al", checked: true },
+   		{lastName: "Friese", name: "Andy", checked: true},
+   		{lastName: "Mann", name: "Anita", checked: false},
+   		{lastName: "Schutt", name: "Doris", checked: true},
+   		{lastName: "Open", name: "Doris", checked: true},
+   		{lastName: "Dewit", name: "Kenya", checked: false},
+   		{lastName: "Zar", name: "Lou", checked: true},
+   		{lastName: "Burr", name: "Tim", checked: true},
+   		{lastName: "Hughes", name: "Tish", checked: true},
+   		{lastName: "Town", name: "Mo", checked: true},
+   		{lastName: "Case", name: "Justin", checked: false},
+   		{lastName: "Time", name: "Justin", checked: true},
+   		{lastName: "Barr", name: "Sandy", checked: true},
+   		{lastName: "Poole", name: "Gene", checked: true},
+   		{lastName: "Ander", name: "Corey", checked: false},
+   		{lastName: "Early", name: "Brighton", checked: true},
+   		{lastName: "Noring", name: "Constance", checked: true},
+   		{lastName: "O'Lantern", name: "Jack", checked: true},
+   		{lastName: "Tress", name: "Matt", checked: true},
+   		{lastName: "Turner", name: "Paige", checked: true}
+   	];
+
+	var oTable = new sap.ui.table.Table("table",{
+                 fixedColumnCount: 1                       
+                                        });
+	
+	oTable.setSelectionMode(sap.ui.table.SelectionMode.Multi);
+
+ var oControl = new sap.ui.commons.CheckBox().bindProperty("checked", "checked");
+ 	oTable.addColumn(new sap.ui.table.Column({width: "190px", label: new sap.ui.commons.Label({text: "Checked (very long label text to show wrapping behavior)" /*, wrapping: true */}), template: oControl, sortProperty: "checked", filterProperty: "checked", hAlign: "Center", autoResizable: true}));
+
+	var oControl = new sap.ui.commons.TextView().bindProperty("text", "lastName");
+	var oColumn = new sap.ui.table.Column({multiLabels: [
+			new sap.ui.commons.Label({text: "Last Name"}),
+			new sap.ui.commons.Label({text: "Second level header"})
+		],width: "490px", template: oControl, sortProperty: "lastName", filterProperty: "lastName", headerSpan: [2,1], autoResizable: true});
+	oTable.addColumn(oColumn, {autoResizable: true});
+	
+
+
+  oControl = new sap.ui.commons.TextField().bindProperty("value", "name");
+	oTable.addColumn(new sap.ui.table.Column({ multiLabels: [
+	        new sap.ui.commons.Label({text: "First Name", textAlign: "Right"}),
+	        new sap.ui.commons.Label({text: "Name of the person"})
+	       ],width: "490px", template: oControl, sortProperty: "name", filterProperty: "name", autoResizable: true}));
+	
+
+
+
+   
+	
+	var oModel = new sap.ui.model.json.JSONModel();
+	oModel.setData({modelData: aData});
+	oTable.setModel(oModel);
+	oTable.bindRows("/modelData");
+  oTable.placeAt("content");
+
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script src="https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js"
+        id="sap-ui-bootstrap"
+        data-sap-ui-libs="sap.ui.commons,sap.m,sap.ui.table"
+        data-sap-ui-theme="sap_bluecrystal">
+    </script>
+    <!-- add sap.ui.table,sap.ui.ux3 and/or other libraries to 'data-sap-ui-libs' if required -->
+
+    <script>
+        sap.ui.localResources("learning");
+        var view = sap.ui.view({id:"idfirst1", viewName:"learning.first", type:sap.ui.core.mvc.ViewType.JS});
+        view.placeAt("content");
+    </script>
+
+  </head>
+  <body class="sapUiBody" role="application">
+    <div id="content"></div>
+    <script>
+        var data = [
+            {ReleaseDate : "" , Description : "SAP1"},
+            {ReleaseDate : "" , Description : "SAP2"},
+            {ReleaseDate : "" , Description : "SAP3"},
+                                
+                                
+                                ];
+                    
+                     var  oSCNJSon = new sap.ui.model.json.JSONModel();  
+                     
+                     oSCNJSon.setData(data);
+                
+                var oTable = new sap.ui.table.Table("tableid", {
+                    selectionMode : sap.ui.table.SelectionMode.Multi,
+                    selectionBehavior: sap.ui.table.SelectionBehavior.Row,
+                    //navigationMode : sap.ui.table.NavigationMode.ScrollBar,
+                    visibleRowCount : 3,
+                    });
+                
+                oTable.addColumn(new sap.ui.table.Column({
+                    label : new sap.m.Label({text : "Description"}),
+                    template : new sap.m.Text({text : "{Description}"}),
+                    }));
+                    
+
+                    oTable.addColumn(new sap.ui.table.Column({
+                    label : new sap.m.Label({text : "ReleaseDate"}),
+                    template : new sap.ui.commons.ValueHelpField({value : "{ReleaseDate}",
+                        valueHelpRequest: function(){
+                            
+                            var oDialog1 = new sap.ui.commons.Dialog();
+                            oDialog1.setTitle("My first Dialog");
+                            var oText = new sap.ui.commons.TextField({value: "hi"});
+                            oDialog1.addContent(oText);
+                            oDialog1.addButton(new sap.ui.commons.Button({text: "OK", press:function(){
+                                
+                                var index = oTable.getSelectedIndex();
+                                
+                                
+                                var myval = oText.getValue()
+                            var data = oTable.getModel().oData;
+                console.log(data);
+                            //for(var i = 0;i<data.length;i++)
+                                
+                                data[index].ReleaseDate = myval;
+                                
+                            //  }
+                                 oTable.getModel().refresh();   
+                                 oDialog1.close();
+                                
+                            }}));
+                            
+                            oDialog1.open()
+                            
+                            
+                            
+                            
+                        }   
+                    
+                    }),
+                    }));
+
+            oTable.setModel(oSCNJSon)
+                    
+                    oTable.bindRows("/"); //If json then oTable.bindRows(/value)
+                    //oTable.bindRows("/Products");
+                    //oTable.getBinding("rows").filter([oFilter1,oFilter2,oFilter3]);
+                    oTable.placeAt("content");
+
+    </script>
+  </body>
+</html>
