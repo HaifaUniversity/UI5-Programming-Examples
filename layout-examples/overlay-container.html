@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/afif/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html><head>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+	
+	<title>OData Date Formats</title>
+	
+    <script id='sap-ui-bootstrap' type='text/javascript' 
+        src='https://sapui5.netweaver.ondemand.com/resources/sap-ui-core.js'
+          data-sap-ui-theme='sap_goldreflection'
+        data-sap-ui-libs='sap.ui.commons,sap.ui.ux3,sap.ui.table'>
+  
+    </script> 
+	
+	
+	<script>
+//Define some sample data 
+//Define some sample data 
+var aData = [
+	{lastName: "Dente", name: "Al", checked: true, linkText: "www.sap.com", href: "http://www.sap.com", src: "images/person1.gif", gender: "male", rating: 4},
+	{lastName: "Friese", name: "Andy", checked: true, linkText: "www.sap.com", href: "http://www.sap.com", src: "images/person2.gif", gender: "male", rating: 2},
+	{lastName: "Mann", name: "Anita", checked: false, linkText: "www.sap.com", href: "http://www.sap.com", src: "images/person1.gif", gender: "female", rating: 3},
+	{lastName: "Schutt", name: "Doris", checked: true, linkText: "www.sap.com", href: "http://www.sap.com", src: "images/person1.gif", gender: "female", rating: 4},
+];
+
+//Create an instance of the table control
+var oTable = new sap.ui.table.Table({
+	title: "Table Example",
+	visibleRowCount: 4
+});
+
+//Define the columns and the control templates to be used
+var oColumn = new sap.ui.table.Column({
+	label: new sap.ui.commons.Label({text: "Last Name"}),
+	template: new sap.ui.commons.TextView().bindProperty("text", "lastName"),
+	sortProperty: "lastName",
+	filterProperty: "lastName",
+	width: "200px"
+});
+oTable.addColumn(oColumn);
+oTable.addColumn(new sap.ui.table.Column({
+	label: new sap.ui.commons.Label({text: "First Name"}),
+	template: new sap.ui.commons.TextField().bindProperty("value", "name"),
+	sortProperty: "name",
+	filterProperty: "name",
+	width: "100px"
+}));
+oTable.addColumn(new sap.ui.table.Column({
+	label: new sap.ui.commons.Label({text: "Checked"}),
+	template: new sap.ui.commons.CheckBox().bindProperty("checked", "checked"),
+	sortProperty: "checked",
+	filterProperty: "checked",
+	width: "75px",
+	hAlign: "Center"
+}));
+
+//Create a model and bind the table rows to this model
+var oModel = new sap.ui.model.json.JSONModel();
+oModel.setData({modelData: aData});
+oTable.setModel(oModel);
+oTable.bindRows("/modelData");
+
+	var overlay = new sap.ui.ux3.OverlayContainer({
+		openButtonVisible: false
+	});
+                  
+    overlay.addContent(oTable);
+	var oOverlayContainerButton = new sap.ui.commons.Button({
+		text : "Open OverlayContainer"
+	}).placeAt("content");
+	oOverlayContainerButton.attachPress(function(oControlEvent) {
+		overlay.open();
+	});
+      
+      
+ 	</script>
+	</head>
+	<body class='sapUiBody'>
+		<div id='content'></div>
+	</body>
+</html>
