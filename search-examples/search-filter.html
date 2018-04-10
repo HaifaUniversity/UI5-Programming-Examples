@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by qualiture (http://jsbin.com/vigeg/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta name="description" content="SearchField example" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8">
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
+          id="sap-ui-bootstrap" 
+          data-sap-ui-theme="sap_bluecrystal" 
+          data-sap-ui-libs="sap.ui.commons,sap.m"></script>
+  <title>SearchField example</title>
+</head>
+
+<body class="sapUiBody">
+  <div id="uiArea"></div> 
+<script id="jsbin-javascript">
+    //UI5 view
+    sap.ui.jsview("local.view", {
+        getControllerName: function() {
+            return "local.controller";
+        },
+
+        createContent: function(oController) {
+
+            var sf = new sap.m.SearchField({
+                placeholder: "Search",
+                showRefreshButton: true,
+                liveChange: oController.PR_Search,
+                search: oController.PR_Search,
+                tooltip: "Search for objects..",
+            });
+
+            var po_list = new sap.m.List("polist", {
+                inset: false,
+            });
+
+            var V_List_itemtemplate = new sap.m.StandardListItem({
+                title: "{PoNumber}"
+            });
+
+            po_list.bindItems({
+                path: "/",
+                template: V_List_itemtemplate,
+            });
+
+            return [sf, po_list];
+        }
+    });
+
+    //UI5 controller
+    sap.ui.controller("local.controller", {
+        onInit: function() {
+            var data = [{
+                PoNumber: "1000",
+                name: "Item 01"
+            }, {
+                PoNumber: "1100",
+                name: "Item 02"
+            }, {
+                PoNumber: "2000",
+                name: "Item 03"
+            }, {
+                PoNumber: "2001",
+                name: "Item 04"
+            }, {
+                PoNumber: "2002",
+                name: "Item 05"
+            }];
+
+            //data = [];
+            var oModel = new sap.ui.model.json.JSONModel();
+            oModel.setData(data);
+            sap.ui.getCore().setModel(oModel);
+        },
+
+        PR_Search: function(oEvent) {
+            var tpmla = oEvent.getParameter("newValue");
+            var filters = new Array();
+            var oFilter = new sap.ui.model.Filter("PoNumber", sap.ui.model.FilterOperator.Contains, tpmla);
+            filters.push(oFilter);
+
+            //get list created in view
+            this.oList = sap.ui.getCore().byId("polist");
+            this.oList.getBinding("items").filter(filters);
+        },
+    });
+
+    sap.ui.view({
+        type: sap.ui.core.mvc.ViewType.JS,
+        viewName: "local.view"
+    })
+        .placeAt("uiArea");
+
+</script>
+</body>
+</html>

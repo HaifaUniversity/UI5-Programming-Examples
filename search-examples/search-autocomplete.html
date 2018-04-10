@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by dennisseah (http://jsbin.com/qobuma/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <script 
+            src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
+            id="sap-ui-bootstrap" 
+            data-sap-ui-theme="sap_bluecrystal" 
+            data-sap-ui-xx-bindingSyntax="complex" 
+            data-sap-ui-libs="sap.m"></script>
+  </head>
+  <body class="sapUiBody">
+    <div id='content'></div>
+  <script id="jsbin-javascript">
+var model = new sap.ui.model.json.JSONModel({
+  Customers : [
+    {name: 'April', id: 1},
+    {name: 'Bob', id: 2},
+    {name: 'Cathy', id: 3}
+  ]
+});
+
+new sap.m.Input({
+  placeholder: "Customer",
+  showSuggestion: true,
+  suggestionItems: {
+    path: "/Customers",
+    template: new sap.ui.core.Item({text: "{name}"})
+  },
+  suggestionItemSelected: function(e) {
+    var oSel = e.getParameter('selectedItem');
+    sap.m.MessageToast.show(JSON.stringify(oSel.getBindingContext().getObject()));
+  }
+
+}).setModel(model).placeAt('content')
+
+</script>
+</body>
+</html>
