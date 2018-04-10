@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by rashchynski (http://jsbin.com/narufu/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+	<meta name="description" content="OpenUI5 TreeTable with dynamic columns">
+	<script src="https://openui5.hana.ondemand.com/resources/sap-ui-core-dbg.js" id="sap-ui-bootstrap" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-libs="sap.m, sap.ui.table"></script>
+
+	<script type="text/javascript">
+		var data = {
+			/* Define the TreeTable Columns */
+			columns : [ {
+				ColumnName : "TEXT",
+				Label : "First Column",
+				Tooltip : "Tooltip First Column",
+				IconName : "",
+				width : ""
+			},
+				{
+					ColumnName : "SECONDCOLUMN",
+					Label : "Second Column",
+					Tooltip : "Tooltip Second Column",
+					IconName : "",
+					width : ""
+				} ],
+			/* Define the TreeTable Nodes */
+			nodes : {
+				0 : {
+					NodeKey : "1",
+					HasChildren : true,
+					Children : [ {
+						NodeKey : "2",
+						Text : "Node 2",
+						Tooltip : "Tooltip for Node 2",
+						IconName : "",
+						HasChildren : true,
+						NodeColumns : {
+							Text : "TEXT: Node a",
+							TEXT : {
+								NodeKey : "2",
+								ColumnName : "TEXT",
+								Text : "TEXT: Node 2",
+								Tooltip : "TEXT: Tooltip for Node 2",
+								IconName : ""
+							},
+							SECONDCOLUMN : {
+								NodeKey : "2",
+								ColumnName : "SECONDCOLUMN",
+								Text : "SECONDCOLUMN: Node 2",
+								Tooltip : "SECONDCOLUMN: Tooltip for Node 2",
+								IconName : ""
+							}
+						},
+
+						Children : [ {
+							NodeKey : "3",
+							Text : "Node 3",
+							Tooltip : "Tooltip for Node 3",
+							IconName : "",
+							HasChildren : false,
+							NodeColumns : {
+								TEXT : {
+									NodeKey : "3",
+									ColumnName : "TEXT",
+									Text : "TEXT: Node 3",
+									Tooltip : "TEXT: Tooltip for Node 3",
+									IconName : ""
+								},
+								SECONDCOLUMN : {
+									NodeKey : "3",
+									ColumnName : "SECONDCOLUMN",
+									Text : "SECONDCOLUMN: Node 3",
+									Tooltip : "SECONDCOLUMN: Tooltip for Node 3",
+									IconName : ""
+								}
+							}
+						} ]
+					} ],
+					NodeColumns : {
+						Text : "TEXT: Node a",
+						TEXT : {
+							NodeKey : "1",
+							ColumnName : "TEXT",
+							Text : "TEXT: Node 1",
+							Tooltip : "TEXT: Tooltip for Node 1",
+							IconName : ""
+						},
+						SECONDCOLUMN : {
+							NodeKey : "1",
+							ColumnName : "SECONDCOLUMN",
+							Text : "SECONDCOLUMN: Node 1",
+							Tooltip : "SECONDCOLUMN: Tooltip for Node 1",
+							IconName : ""
+						}
+					}
+				},
+				1 : {
+					NodeKey : "4",
+					Text : "Node 4",
+					Tooltip : "Tooltip for Node 4",
+					IconName : "",
+					HasChildren : true,
+					Children : [ {
+						NodeKey : "5",
+						Text : "Node 5",
+						Tooltip : "Tooltip for Node 5",
+						IconName : "",
+						HasChildren : false,
+						NodeColumns : {
+							Text : "TEXT: Node b",
+							TEXT : {
+								NodeKey : "5",
+								ColumnName : "TEXT",
+								Text : "TEXT: Node 5",
+								Tooltip : "TEXT: Tooltip for Node 5",
+								IconName : ""
+							},
+							SECONDCOLUMN : {
+								NodeKey : "5",
+								ColumnName : "SECONDCOLUMN",
+								Text : "SECONDCOLUMN: Node 5",
+								Tooltip : "SECONDCOLUMN: Tooltip for Node 5",
+								IconName : ""
+							}
+						}
+					} ],
+					NodeColumns : {
+						TEXT : {
+							NodeKey : "4",
+							ColumnName : "TEXT",
+							Text : "TEXT: Node 4",
+							Tooltip : "TEXT: Tooltip for Node 4",
+							IconName : ""
+						},
+						SECONDCOLUMN : {
+							NodeKey : "4",
+							ColumnName : "SECONDCOLUMN",
+							Text : "SECONDCOLUMN: Node 4",
+							Tooltip : "SECONDCOLUMN: Tooltip for Node 4",
+							IconName : ""
+						}
+					}
+				}
+			}
+		};
+
+		var oTable = new sap.ui.table.TreeTable();
+
+		var __columns = [];
+		$.each(data.columns, function( i, column )
+		{
+			__columns.push(column.ColumnName);
+
+			oTable.addColumn(
+					new sap.ui.table.Column({
+						template : new sap.m.Text({
+							"text" : "{" + column.ColumnName + "}"
+						}),
+
+						label : new sap.m.Label({        "text" : column.Label       }) }));
+
+
+		});
+
+		var traverse = function(node)
+		{
+			var __newObject = { valid : false };
+
+			if(node["NodeColumns"])
+			{
+				$.each(__columns, function( i, column ) {
+					__newObject[column] = node["NodeColumns"][column].Text;
+					__newObject.valid = true;
+				});
+			}
+
+			if(node["Children"])
+			{
+				$.each(node["Children"], function( i, child ){
+					var tmp = traverse(child);
+					if(tmp) {
+						__newObject[i] = tmp;
+						__newObject.valid = true;
+					}
+
+				});
+			}
+
+			if(__newObject.valid)
+			return __newObject;
+			else
+				return undefined;
+		}
+
+		var __nodes = [];
+
+
+		$.each(data.nodes, function( i, node ){
+			__nodes[i]  = traverse(node);
+		});
+
+
+		var oTableModel = new sap.ui.model.json.JSONModel( { nodes : __nodes } );
+
+		oTable.setModel(oTableModel);
+		oTable.placeAt("content");
+
+		oTable.bindAggregation('rows', {
+			path : "/nodes"
+
+		});
+
+	</script>
+
+	<meta charset="utf-8">
+	<title>JS Bin</title>
+</head>
+<body>
+<div id="content"></div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by dennisseah (http://jsbin.com/woqive/4/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta name="description" content="OpenUI5 BIN Starting template" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8">
+  <script src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js" 
+          id="sap-ui-bootstrap" 
+          data-sap-ui-theme="sap_bluecrystal" 
+          data-sap-ui-libs="sap.m,sap.ui.commons,sap.ui.table"></script>
+</head>
+
+<body class="sapUiBody">
+  <div id="content"></div> 
+<script id="jsbin-javascript">
+var oData = {
+  root : {
+    name : "root",
+    description : "root description",
+    checked : "Checked",
+    0 : {
+      name : "item1",
+      checked : "Checked",
+      0 : {
+        name : "subitem1-1",
+        checked : "Checked",
+        0 : {
+          name : "subsubitem1-1-1",
+          checked : "Checked"
+        },
+        1 : {
+          name : "subsubitem1-1-2",
+          checked : "Checked"
+        }
+      },
+      1 : {
+        name : "subitem1-2",
+        checked : "Checked",
+        0 : {
+          name : "subsubitem1-2-1",
+          checked : "Checked"
+        }
+      }
+
+    },
+    1 : {
+      name : "item2",
+      checked : "Mixed",
+      0 : {
+        name : "subitem2-1",
+        checked : "Checked"
+      },
+      1 : {
+        name : "subitem2-2",
+        checked : "Unchecked"
+      }
+    },
+    2 : {
+      name : "item3",
+      checked : "Unchecked"
+    }
+
+  }
+};
+
+for ( var i = 0; i < 5; i++) {
+  oData["root"][2][i] = {
+    name : "subitem3-" + i,
+    checked : "Unchecked"
+  };
+}
+
+function setChildState(obj, state) {
+  getChildren(obj).forEach(function(x) {
+    x.checked = state;
+    setChildState(x, state);
+  });
+}
+
+function validateChild(model, path) {
+  var cur = model.getProperty(path);
+  setChildState(cur, cur.checked);
+}
+
+function getChildren(obj) {
+  var children = [];
+  Object.getOwnPropertyNames(obj).forEach(function(x) {
+    if (typeof obj[x] === 'object') {
+      children.push(obj[x]);
+    }
+  });
+  return children;
+}
+
+function validateParent(model, path) {
+  if (path === '/root') {
+    return;
+  }
+  var obj = model.getProperty(path);
+  var state = 'Unchecked';
+  var children = getChildren(obj);
+
+  var selectedCount = children.filter(function(x) {
+    return x.checked === 'Checked';
+  }).length;
+
+  if (selectedCount === children.length) {
+    obj.checked = 'Checked';
+  } else {
+    var unselectedCount = children.filter(function(x) {
+      return x.checked === 'Unchecked';
+    }).length;
+
+    if (unselectedCount === children.length) {
+      obj.checked = 'Unchecked';
+    } else {
+      obj.checked = 'Mixed';
+    }
+  }
+
+  model.setProperty(path, obj);
+  path = path.substring(0, path.lastIndexOf('/'));
+  if (path !== '/root') {
+    validateParent(model, path);
+  }
+}
+
+
+var oTable = new sap.ui.table.TreeTable({
+  visibleRowCount: 20,
+  columns : [ new sap.ui.table.Column({
+    label : "Tree",
+    template : new sap.ui.commons.TriStateCheckBox({
+      text: '{name}',
+      selectionState: '{checked}',
+      change : function(e) {
+        var cxt = e.getSource().getBindingContext();
+        var path = cxt.getPath();
+        validateChild(this.getModel(), path);
+        path = path.substring(0, path.lastIndexOf('/'));
+        validateParent(this.getModel(), path);
+      }
+    })
+  })],
+  selectionMode : sap.ui.table.SelectionMode.Single,
+  expandFirstLevel : true,
+});
+
+oTable.bindRows("/root");
+
+function noborder(p) {
+    var $this = p.$();
+    $this.find('.sapUiPanelHdr').remove();
+    $this.css('background-color', 'transparent');
+    $this.css('border-top-color', 'transparent');
+    $this.css('border-bottom-color', 'transparent');
+    $this.css('border-left-color', 'transparent');
+    $this.css('border-right-color', 'transparent');
+    $this.find('.sapUiPanelCont').css('background-color', 'transparent');
+}
+
+
+var pInner = new sap.ui.commons.Panel({
+  borderDesign: sap.ui.commons.enums.BorderDesign.None,
+  areaDesign: sap.ui.commons.enums.AreaDesign.Transparent,
+  showCollapseIcon: false,
+  content : [
+    oTable,
+    new sap.ui.commons.Button({
+      text: 'Test'
+    })
+  ]
+}).addDelegate({
+  onAfterRendering: function() {
+    noborder(pInner);
+  }
+});
+
+
+var pOuter = new sap.ui.commons.Panel({
+  content: [
+    pInner
+  ]
+}).addDelegate({
+  onAfterRendering: function() {
+    noborder(pOuter);
+  }
+});
+
+var oModel = new sap.ui.model.json.JSONModel(oData);
+pOuter.setModel(oModel);
+
+var hbox = new sap.m.HBox({
+  items : [pOuter]
+})
+
+hbox.placeAt("content");
+
+</script>
+</body>
+</html>
