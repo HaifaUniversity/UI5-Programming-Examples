@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by CmIm (http://jsbin.com/hepuxiza/17/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Stacked chart</title>
+		<script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" type="text/javascript" data-sap-ui-theme="sap_goldreflection" data-sap-ui-libs="sap.ui.core,sap.ui.commons,sap.ui.table,sap.viz">
+		</script>
+		<script type="text/javascript">
+
+         
+		</script>
+	</head>
+
+	<body class="sapUiBody" id="body" role="application">
+		<div id="sample"></div>
+	<script id="jsbin-javascript">
+var oModel2D = new sap.ui.model.json.JSONModel({
+          data : [ {
+            category : 'OP-R-EX-Cash from operating activities',
+            color: '#8873A2',
+            date : '2014-04-01',
+            value : 100
+          }, {
+            category : 'OP-R-EX-Cash from operating activities',
+            color: '#8873A2',
+            date : '2014-04-02',
+            value : 30
+          }, {
+            category : 'OP-R-EX-Cash from operating activities',
+            color: '#8873A2',
+            date : '2014-04-02',
+            value : 50
+          }, {
+            category : 'OP-R-EX-Cash from operating activities',
+            color: '#8873A2',
+            date : '2014-04-23',
+            value : -30
+          }, {
+            category : 'FI-R-EX-Cash from operating activities',
+            color: '#85AA00',
+            date : '2014-04-23',
+            value : -20
+          }, {
+            category : 'OP-R-EX-Cash from operating activities',
+            color: '#8873A2',
+            date : '2014-04-04',
+            value : -20
+          }, {
+            category : 'OP-R-EX-Cash from operating activities',
+            color: '#8873A2',
+            date : '2014-04-05',
+            value : 60
+          }, {
+            category : 'OP-P-EX-Other operating payments',
+            color: '#3A95B3',
+            date : '2014-04-01',
+            value : 10
+          }, {
+            category : 'OP-P-EX-Other operating payments',
+            color: '#3A95B3',
+            date : '2014-04-02',
+            value : 20
+          }, {
+            category : 'OP-P-EX-Other operating payments',
+            color: '#3A95B3',
+            date : '2014-04-03',
+            value : 30
+          }, {
+            category : 'OP-P-EX-Other operating paymfents',
+            color: '#8895B3',
+            date : '2014-04-04',
+            value : 40
+          }, {
+            category : 'OP-P-EX-Other operating payments',
+            color: '#3A95B3',
+            date : '2014-04-05',
+            value : 50
+          }, {
+            category : 'OP-P-EX-Other operating payments',
+            color: '#3A95B3',
+            date : '2014-04-06',
+            value : 60
+          } ]
+        });
+
+
+  var dataset = new sap.viz.ui5.data.FlattenedDataset({
+
+              dimensions : [ {
+                axis : 1,
+                name : 'Date',
+                value : "{date}"
+              }, {
+                axis : 2,
+                name : 'Category',
+                value : "{category}"
+              } ],
+
+              measures : [ {
+                name : 'Cash flow value',
+                value : '{value}'
+              } ],
+
+              data : {
+                path : "/data"
+              }
+
+            });
+
+	  var legendPosition = new sap.viz.ui5.types.Legend({layout: {
+			 position: "left"
+		 }}); 
+
+var column = new sap.viz.ui5.StackedColumn("chartStackedColumn", {
+  width : "80%",
+  height : "400px",
+  title : {  },
+  dataset : dataset,
+  legendGroup: legendPosition
+});
+
+column.setModel(oModel2D);
+
+column.placeAt("sample");
+</script>
+</body>
+</html>
