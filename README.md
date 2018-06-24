@@ -19,30 +19,30 @@
         
 *   Add and Delete Table Row values,
 
-*   [http://jsbin.com/wanopave/1/edit?html,output](http://jsbin.com/wanopave/1/edit?html,output)
+*   [http://jsbin.com/wanopave/1/edit?html,output](http://jsbin.com/wanopave/1/edit?html,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/add-and-delete-table-row-values.html)
 
 *   F4 inside table row(F4 value help in Inside sap.m.table)
-    *   [https://jsfiddle.net/indrajithpatel/va0y7j7r/18/](https://jsfiddle.net/indrajithpatel/va0y7j7r/18/)
+    *   [https://jsfiddle.net/indrajithpatel/va0y7j7r/18/](https://jsfiddle.net/indrajithpatel/va0y7j7r/18/) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/F4-inside-table-row.html)
 *   Table rows move up and down(Interchanging the table rows)
-    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/UPokiS/2/edit?html,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/UPokiS/2/edit?html,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/table-rows-move-up-and-down.html)
 *   Set firstColumnCount based on List(Pagination based on given input in sap.ui.table rows)
-    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/jaleyu/1/edit?html,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/jaleyu/1/edit?html,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/set-first-column-count-based-on-list.html)
 *   Import csv as table values
-    *   [http://help.sap.com/businessobject/product\_guides/vi01/en/webide\_visExp_en.pdf](http://help.sap.com/businessobject/product_guides/vi01/en/webide_visExp_en.pdf)
+    *   [http://help.sap.com/businessobject/product\_guides/vi01/en/webide\_visExp_en.pdf](http://help.sap.com/businessobject/product_guides/vi01/en/webide_visExp_en.pdf) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/import-csv-as-table-values.html)
 *   Add Values into Table(Given input is adding to table row)
-    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/qapage/1/edit?html,js,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/qapage/1/edit?html,js,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/add-values-into-table.html)
 *   Table view more, view less with out using growth property(using button number of rows displayed)
-    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/kipese/21/edit?js,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/kipese/21/edit?js,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/table-view-more-less.html)
 *   Sap.ui.Table Binding
-    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/openui5-table-json/6/edit?html,output)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/openui5-table-json/6/edit?html,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/sap.ui.table-binding.html)
 *   Table Rebinding after adding some value to the table,
     *   [http://jsbin.com/sojot/1/edit?html,output](http://jsbin.com/sojot/1/edit?html,output)
 *   Table Merge Cells,
-    *   [http://jsbin.com/zoreg/2/edit?html,output](http://jsbin.com/zoreg/2/edit?html,output)
+    *   [http://jsbin.com/zoreg/2/edit?html,output](http://jsbin.com/zoreg/2/edit?html,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/table-merge-cells.html)
 *   Muitiple table header fixedRowCount
-    *   [http://jsbin.com/qixahidila/1/edit?js,output](http://jsbin.com/qixahidila/1/edit?js,output)
+    *   [http://jsbin.com/qixahidila/1/edit?js,output](http://jsbin.com/qixahidila/1/edit?js,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/muitiple-table-header-fixedRowCount.html)
 *   Mouse Over and Mouse Leave event in table,
-    *   [http://jsbin.com/dohive/edit?html,js,output](http://jsbin.com/dohive/edit?html,js,output)
+    *   [http://jsbin.com/dohive/edit?html,js,output](http://jsbin.com/dohive/edit?html,js,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/mouse-over-and-mouse-leave-event-in-table.html)
 
 **2\. Combo Box Examples:**
 
