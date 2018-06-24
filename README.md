@@ -3,19 +3,19 @@
 **1\. Table Examples:**
 
 *   Get selected table row values
-    *    [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/kipese/7/edit?html,js,output) [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/get-selected-table-row-values.html)
+    *    [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/kipese/7/edit?html,js,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/get-selected-table-row-values.html)
 *   Getting Table Column Values(To get all the values available in the particular row)
-    *    [http://jsbin.com/tipokenuki/1/edit?html,js,console,output](http://jsbin.com/tipokenuki/1/edit?html,js,console,output) [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/getting-table-column-values.html)
+    *    [http://jsbin.com/tipokenuki/1/edit?html,js,console,output](http://jsbin.com/tipokenuki/1/edit?html,js,console,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/getting-table-column-values.html)
 *   Get Table row data by rowContext(),
-    *     [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/dohive/edit?js,output) [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/get-table-row-data-by-rowContext().html)
+    *     [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/dohive/edit?js,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/get-table-row-data-by-rowContext().html)
 *   Delete table rows,
-    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/vuzen/3/edit?html,js,output) [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/delete-table-rows-1.html)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/vuzen/3/edit?html,js,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/delete-table-rows-1.html)
         
-    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/vudoxi/5/edit?html,output) [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/delete-table-rows-2.html)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/vudoxi/5/edit?html,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/delete-table-rows-2.html)
         
-    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/yewula/1/edit?html,css,output) [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/delete-table-rows-3.html)
+    *   [JS Bin – Collaborative JavaScript Debugging](http://jsbin.com/yewula/1/edit?html,css,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/delete-table-rows-3.html)
         
-    *   [http://jsbin.com/dohive/edit?html,js,output](http://jsbin.com/dohive/edit?html,js,output) [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/delete-table-rows-4.html)
+    *   [http://jsbin.com/dohive/edit?html,js,output](http://jsbin.com/dohive/edit?html,js,output) | [source](https://github.com/HaifaUniversity/UI5-Programming-Examples/blob/master/table-examples/delete-table-rows-4.html)
         
 *   Add and Delete Table Row values,
 
